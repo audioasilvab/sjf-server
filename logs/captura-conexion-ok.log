@@ -1,0 +1,1480 @@
+[2026-10-16T22:10:45.379Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 48
+cuerpo (48 bytes):
+{
+  "cid": -2344864883623827500,
+  "version": 268501015
+}
+
+[2026-10-16T22:10:45.381Z]   [diag] handshake #1 de 192.168.31.83  cid=-2344864883623827207
+
+[2026-10-16T22:10:45.384Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"h8GiqV4lLHQ5EdojN5tUtA==","challenge":"+P39txRw1np/pdPOreI6XHSsYnrI31e+eSMp1Y7nl+SSjO9JGNhIxwAA"}
+
+[2026-10-16T22:10:45.400Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "n8+Te7j7Y280VM5B0LqKEPKu1V3n+Q/Tr2BXmGkygEk=",
+  "facebookId": "",
+  "challengeToken": "h8GiqV4lLHQ5EdojN5tUtA==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:10:45.402Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792188645,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724645,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188645,"nu...
+
+[2026-10-16T22:10:45.401Z]   [diag] *** CONNECT recibido (#1) -> el handshake fue aceptado ***
+
+[2026-10-16T22:10:59.117Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "n8+Te7j7Y280VM5B0LqKEPKu1V3n+Q/Tr2BXmGkygEk=",
+  "facebookId": "",
+  "challengeToken": "h8GiqV4lLHQ5EdojN5tUtA==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:10:59.118Z]   [diag] *** CONNECT recibido (#2) -> el handshake fue aceptado ***
+
+[2026-10-16T22:10:59.118Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792188659,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724659,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188659,"nu...
+
+[2026-10-16T22:11:26.681Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "n8+Te7j7Y280VM5B0LqKEPKu1V3n+Q/Tr2BXmGkygEk=",
+  "facebookId": "",
+  "challengeToken": "h8GiqV4lLHQ5EdojN5tUtA==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:11:26.682Z]   [diag] *** CONNECT recibido (#3) -> el handshake fue aceptado ***
+
+[2026-10-16T22:11:26.683Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792188686,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724686,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188686,"nu...
+
+[2026-10-16T22:12:21.364Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "n8+Te7j7Y280VM5B0LqKEPKu1V3n+Q/Tr2BXmGkygEk=",
+  "facebookId": "",
+  "challengeToken": "h8GiqV4lLHQ5EdojN5tUtA==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:12:21.365Z]   [diag] *** CONNECT recibido (#4) -> el handshake fue aceptado ***
+
+[2026-10-16T22:12:21.366Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792188741,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724741,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188741,"nu...
+
+[2026-10-16T22:14:10.712Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "n8+Te7j7Y280VM5B0LqKEPKu1V3n+Q/Tr2BXmGkygEk=",
+  "facebookId": "",
+  "challengeToken": "h8GiqV4lLHQ5EdojN5tUtA==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:14:10.712Z]   [diag] *** CONNECT recibido (#5) -> el handshake fue aceptado ***
+
+[2026-10-16T22:14:10.832Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792188850,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724850,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188850,"nu...
+
+[2026-10-16T22:15:20.468Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 47
+cuerpo (47 bytes):
+{
+  "cid": 3747786045758494000,
+  "version": 268501015
+}
+
+[2026-10-16T22:15:20.469Z]   [diag] handshake #2 de 192.168.31.83  cid=3747786045758494436
+
+[2026-10-16T22:15:20.470Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"kVEVloYmqehq0OZa2ZRQ4w==","challenge":"kwgCwOmeTHFb7FUJBReByoDQ5cwT/PbBFdGqoDxHHTHIOdY1cT4/aQAA"}
+
+[2026-10-16T22:15:20.557Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "itHmMiwQ/Ch17W1p3hkWT5ArfkOatg/m6+9kwYed/5U=",
+  "facebookId": "",
+  "challengeToken": "kVEVloYmqehq0OZa2ZRQ4w==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:15:20.558Z]   [diag] *** CONNECT recibido (#6) -> el handshake fue aceptado ***
+
+[2026-10-16T22:15:20.558Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792188920,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724920,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188920,"nu...
+
+[2026-10-16T22:15:34.247Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "itHmMiwQ/Ch17W1p3hkWT5ArfkOatg/m6+9kwYed/5U=",
+  "facebookId": "",
+  "challengeToken": "kVEVloYmqehq0OZa2ZRQ4w==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:15:34.248Z]   [diag] *** CONNECT recibido (#7) -> el handshake fue aceptado ***
+
+[2026-10-16T22:15:34.248Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792188934,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724934,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188934,"nu...
+
+[2026-10-16T22:16:06.085Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 46
+cuerpo (46 bytes):
+{
+  "version": 268501015,
+  "cid": 521398819914877500
+}
+
+[2026-10-16T22:16:06.087Z]   [diag] handshake #1 de 127.0.0.1  cid=521398819914877474
+
+[2026-10-16T22:16:06.089Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"SL8dsygkm1aXV4Ryx4OfQw==","challenge":"/Y6IpWMbeY11LrFvmItGaRLSX0c/8jIzv6WU8rDlPE8mmiG55T4hNgAA"}
+
+[2026-10-16T22:16:06.386Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 171
+cuerpo (171 bytes):
+{
+  "challengeToken": "SL8dsygkm1aXV4Ryx4OfQw==",
+  "response": "xmF1bmN0aW9u",
+  "deviceId": "test-device",
+  "mode": 0,
+  "numPlays": 0,
+  "numRings": 0,
+  "numRedRings": 0,
+  "xp": 0,
+  "lastPlayerId": 0
+}
+
+[2026-10-16T22:16:06.386Z]   [diag] *** CONNECT recibido (#1) -> el handshake fue aceptado ***
+
+[2026-10-16T22:16:06.395Z]   -> respuesta Connect (449 B): {"status":0,"playerId":1,"isNewAccount":true,"lastLogin":1792188966,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":0,"settingsUri":"","serverSettings":{"serverTime":1792188966,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724966,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188966,"numRings":0,"numRedRings":0,"score":0,"version":268501015}
+
+[2026-10-16T22:16:06.401Z] 
+================ POST /SJF23/GetSettings.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.401Z]   -> respuesta GetSettings (224 B): {"status":0,"serverSettings":{"serverTime":1792188966,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724966,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0}}
+
+[2026-10-16T22:16:06.431Z] 
+================ POST /SJF23/GetProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.431Z]   -> respuesta GetProfile (776 B): {"status":0,"synchronizedPlayerState":{"lastUpdate":1792188966,"numRings":0,"numRedRings":0,"score":0,"charTokenTime":1792188966,"numCharTokens":0,"redRingTokenTime":1792188966,"numRedRingTokens":0,"numChaoSearches":0,"numGoldTotem":0,"numHoopBoost":0,"numPowerDoubler":0,"numQuickFrenzy":0,"numRingStreak":0,"numTimeExtend":0,"numAnimalDoubler":0,"doubleRings":false,"currentRoundId":1,"spinState":0,"lastFreeSpin":1792188966,"pointsPending":0,"chaoStates":[],"awardFlags":0,"energyCount":5,"energyRechargeTime":1792188966,"lastRateVersion":0,"version":268501015,"ftueState":0,"miscData0":0,"miscData1":0,"numConsecutiveLogins":1,"sonic":0,"tails":0,"knuckles":0,"amy":0,"blaze":0,"vector":0,"shadow":0,"silver":0,"rouge":0,"cream":0},"crc":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.470Z] 
+================ POST /SJF23/PushProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.470Z]   -> respuesta PushProfile (127 B): {"status":0,"lastUpdate":1792188966,"numRings":0,"numRedRings":0,"score":0,"version":268501015,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.495Z] 
+================ POST /SJF23/GetScores.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.496Z]   -> respuesta GetScores (56 B): {"status":0,"scores":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.501Z] 
+================ POST /SJF23/PostScore.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 11
+cuerpo (11 bytes):
+{
+  "score": 1
+}
+
+[2026-10-16T22:16:06.501Z]   -> respuesta PostScore (63 B): {"status":0,"isHighScore":true,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.507Z] 
+================ POST /SJF23/GetFriends.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.508Z]   -> respuesta GetFriends (57 B): {"status":0,"friends":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.512Z] 
+================ POST /SJF23/GetMessages.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.512Z]   -> respuesta GetMessages (58 B): {"status":0,"messages":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.518Z] 
+================ POST /SJF23/DeleteMessages.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.533Z]   -> respuesta DeleteMessages (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.538Z] 
+================ POST /SJF23/InviteFriend.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.538Z]   -> respuesta InviteFriend (57 B): {"status":0,"invited":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.544Z] 
+================ POST /SJF23/SendGift.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.545Z]   -> respuesta SendGift (69 B): {"status":0,"nextRequest":1792192566,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.549Z] 
+================ POST /SJF23/RequestEnergy.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.549Z]   -> respuesta RequestEnergy (76 B): {"status":0,"requested":[],"nextRequest":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.574Z] 
+================ POST /SJF23/LogIAP.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.574Z]   -> respuesta LogIAP (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:06.578Z] 
+================ POST /SJF23/AwardRequestItem.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18480
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:06.578Z]   -> respuesta AwardRequestItem (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:09.067Z] 
+================ POST /SJF23/GetProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    Content-Type: application/json
+    Content-Length: 2
+    Host: 127.0.0.1:18480
+    Connection: keep-alive
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:09.067Z]   -> respuesta GetProfile (776 B): {"status":0,"synchronizedPlayerState":{"lastUpdate":1792188969,"numRings":0,"numRedRings":0,"score":0,"charTokenTime":1792188969,"numCharTokens":0,"redRingTokenTime":1792188969,"numRedRingTokens":0,"numChaoSearches":0,"numGoldTotem":0,"numHoopBoost":0,"numPowerDoubler":0,"numQuickFrenzy":0,"numRingStreak":0,"numTimeExtend":0,"numAnimalDoubler":0,"doubleRings":false,"currentRoundId":1,"spinState":0,"lastFreeSpin":1792188969,"pointsPending":0,"chaoStates":[],"awardFlags":0,"energyCount":5,"energyRechargeTime":1792188969,"lastRateVersion":0,"version":268501015,"ftueState":0,"miscData0":0,"miscData1":0,"numConsecutiveLogins":1,"sonic":0,"tails":0,"knuckles":0,"amy":0,"blaze":0,"vector":0,"shadow":0,"silver":0,"rouge":0,"cream":0},"crc":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.733Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 46
+cuerpo (46 bytes):
+{
+  "version": 268501015,
+  "cid": 648063979681649400
+}
+
+[2026-10-16T22:16:38.735Z]   [diag] handshake #1 de 127.0.0.1  cid=648063979681649411
+
+[2026-10-16T22:16:38.737Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"SDpVuuHIXtnheuBDWIWTHA==","challenge":"h0FKdQAhn/4iObqW/QggVAdW8YQSAFyvE2B26/RFetGMXMgiV2qIEQAA"}
+
+[2026-10-16T22:16:38.761Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 171
+cuerpo (171 bytes):
+{
+  "challengeToken": "SDpVuuHIXtnheuBDWIWTHA==",
+  "response": "xmF1bmN0aW9u",
+  "deviceId": "test-device",
+  "mode": 0,
+  "numPlays": 0,
+  "numRings": 0,
+  "numRedRings": 0,
+  "xp": 0,
+  "lastPlayerId": 0
+}
+
+[2026-10-16T22:16:38.761Z]   [diag] *** CONNECT recibido (#1) -> el handshake fue aceptado ***
+
+[2026-10-16T22:16:38.761Z]   -> respuesta Connect (450 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188966,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":0,"settingsUri":"","serverSettings":{"serverTime":1792188998,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724998,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188998,"numRings":0,"numRedRings":0,"score":0,"version":268501015}
+
+[2026-10-16T22:16:38.768Z] 
+================ POST /SJF23/GetSettings.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.768Z]   -> respuesta GetSettings (224 B): {"status":0,"serverSettings":{"serverTime":1792188998,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724998,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0}}
+
+[2026-10-16T22:16:38.774Z] 
+================ POST /SJF23/GetProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.774Z]   -> respuesta GetProfile (776 B): {"status":0,"synchronizedPlayerState":{"lastUpdate":1792188998,"numRings":0,"numRedRings":0,"score":0,"charTokenTime":1792188998,"numCharTokens":0,"redRingTokenTime":1792188998,"numRedRingTokens":0,"numChaoSearches":0,"numGoldTotem":0,"numHoopBoost":0,"numPowerDoubler":0,"numQuickFrenzy":0,"numRingStreak":0,"numTimeExtend":0,"numAnimalDoubler":0,"doubleRings":false,"currentRoundId":1,"spinState":0,"lastFreeSpin":1792188998,"pointsPending":0,"chaoStates":[],"awardFlags":0,"energyCount":5,"energyRechargeTime":1792188998,"lastRateVersion":0,"version":268501015,"ftueState":0,"miscData0":0,"miscData1":0,"numConsecutiveLogins":1,"sonic":0,"tails":0,"knuckles":0,"amy":0,"blaze":0,"vector":0,"shadow":0,"silver":0,"rouge":0,"cream":0},"crc":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.780Z] 
+================ POST /SJF23/PushProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.781Z]   -> respuesta PushProfile (127 B): {"status":0,"lastUpdate":1792188998,"numRings":0,"numRedRings":0,"score":0,"version":268501015,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.790Z] 
+================ POST /SJF23/GetScores.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.790Z]   -> respuesta GetScores (56 B): {"status":0,"scores":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.795Z] 
+================ POST /SJF23/PostScore.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 11
+cuerpo (11 bytes):
+{
+  "score": 1
+}
+
+[2026-10-16T22:16:38.796Z]   -> respuesta PostScore (63 B): {"status":0,"isHighScore":true,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.808Z] 
+================ POST /SJF23/GetFriends.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.808Z]   -> respuesta GetFriends (57 B): {"status":0,"friends":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.818Z] 
+================ POST /SJF23/GetMessages.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.818Z]   -> respuesta GetMessages (58 B): {"status":0,"messages":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.824Z] 
+================ POST /SJF23/DeleteMessages.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.824Z]   -> respuesta DeleteMessages (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.852Z] 
+================ POST /SJF23/InviteFriend.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.853Z]   -> respuesta InviteFriend (57 B): {"status":0,"invited":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.877Z] 
+================ POST /SJF23/SendGift.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.877Z]   -> respuesta SendGift (69 B): {"status":0,"nextRequest":1792192598,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.881Z] 
+================ POST /SJF23/RequestEnergy.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.882Z]   -> respuesta RequestEnergy (76 B): {"status":0,"requested":[],"nextRequest":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.919Z] 
+================ POST /SJF23/LogIAP.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.920Z]   -> respuesta LogIAP (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:38.923Z] 
+================ POST /SJF23/AwardRequestItem.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18481
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:38.924Z]   -> respuesta AwardRequestItem (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:39.569Z] 
+================ POST /SJF23/GetSettings.json ================
+cliente: 127.0.0.1
+cabeceras:
+    Content-Type: application/json
+    Content-Length: 2
+    Host: 127.0.0.1:18481
+    Connection: keep-alive
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:39.570Z]   -> respuesta GetSettings (224 B): {"status":0,"serverSettings":{"serverTime":1792188999,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724999,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0}}
+
+[2026-10-16T22:16:39.578Z] 
+================ POST /SJF23/GetProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    Content-Type: application/json
+    Content-Length: 2
+    Host: 127.0.0.1:18481
+    Connection: keep-alive
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:39.578Z]   -> respuesta GetProfile (776 B): {"status":0,"synchronizedPlayerState":{"lastUpdate":1792188999,"numRings":0,"numRedRings":0,"score":0,"charTokenTime":1792188999,"numCharTokens":0,"redRingTokenTime":1792188999,"numRedRingTokens":0,"numChaoSearches":0,"numGoldTotem":0,"numHoopBoost":0,"numPowerDoubler":0,"numQuickFrenzy":0,"numRingStreak":0,"numTimeExtend":0,"numAnimalDoubler":0,"doubleRings":false,"currentRoundId":1,"spinState":0,"lastFreeSpin":1792188999,"pointsPending":0,"chaoStates":[],"awardFlags":0,"energyCount":5,"energyRechargeTime":1792188999,"lastRateVersion":0,"version":268501015,"ftueState":0,"miscData0":0,"miscData1":0,"numConsecutiveLogins":1,"sonic":0,"tails":0,"knuckles":0,"amy":0,"blaze":0,"vector":0,"shadow":0,"silver":0,"rouge":0,"cream":0},"crc":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:16:39.581Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 127.0.0.1
+cabeceras:
+    Content-Type: application/json
+    Content-Length: 2
+    Host: 127.0.0.1:18481
+    Connection: keep-alive
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:16:39.581Z]   [diag] *** CONNECT recibido (#2) -> el handshake fue aceptado ***
+
+[2026-10-16T22:16:39.581Z]   -> respuesta Connect (450 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188966,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":0,"settingsUri":"","serverSettings":{"serverTime":1792188999,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823724999,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792188999,"numRings":0,"numRedRings":0,"score":0,"version":268501015}
+
+[2026-10-16T22:16:53.756Z]   [diag] *** CONNECT recibido (#8) -> el handshake fue aceptado ***
+
+[2026-10-16T22:16:53.755Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "itHmMiwQ/Ch17W1p3hkWT5ArfkOatg/m6+9kwYed/5U=",
+  "facebookId": "",
+  "challengeToken": "kVEVloYmqehq0OZa2ZRQ4w==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:16:53.756Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792189013,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823725013,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792189013,"nu...
+
+[2026-10-16T22:16:53.759Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 47
+cuerpo (47 bytes):
+{
+  "cid": 3165262898356266500,
+  "version": 268501015
+}
+
+[2026-10-16T22:16:53.760Z]   [diag] handshake #3 de 192.168.31.83  cid=3165262898356266390
+
+[2026-10-16T22:16:53.761Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"HQL0hTh4o3EePpiMQdhREg==","challenge":"A0qHWSFKrUt4mXStzba/ybVUEwH61dpRTpXzCRQxV2BJGGnuxWIJagAA"}
+
+[2026-10-16T22:16:53.857Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "q8taLeIavL2NaiLueUSlFnJuGrhTMe3AD2Th8FLwwNM=",
+  "facebookId": "",
+  "challengeToken": "HQL0hTh4o3EePpiMQdhREg==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:16:53.858Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792189013,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823725013,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792189013,"nu...
+
+[2026-10-16T22:16:53.858Z]   [diag] *** CONNECT recibido (#9) -> el handshake fue aceptado ***
+
+[2026-10-16T22:17:18.678Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "q8taLeIavL2NaiLueUSlFnJuGrhTMe3AD2Th8FLwwNM=",
+  "facebookId": "",
+  "challengeToken": "HQL0hTh4o3EePpiMQdhREg==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:17:18.679Z]   [diag] *** CONNECT recibido (#10) -> el handshake fue aceptado ***
+
+[2026-10-16T22:17:18.681Z]   -> respuesta Connect (456 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188484,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":"local","settingsUri":"","serverSettings":{"serverTime":1792189038,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823725038,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792189038,"nu...
+
+[2026-10-16T22:20:31.585Z] 
+================ GET /__status ================
+cliente: 127.0.0.1
+cabeceras:
+    User-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; es-VE) WindowsPowerShell/5.1.22621.2428
+    Host: 127.0.0.1:18490
+    Connection: Keep-Alive
+cuerpo (0 bytes):
+(vacio)
+
+[2026-10-16T22:21:12.531Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 48
+cuerpo (48 bytes):
+{
+  "cid": -8945218409084359000,
+  "version": 268501015
+}
+
+[2026-10-16T22:21:12.576Z]   [diag] handshake #1 de 192.168.31.83  cid=-8945218409084358327
+
+[2026-10-16T22:21:12.686Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"7TO7i89r5kKpBGVbfR9ZaQ==","challenge":"EYqTinorybndX2X61lEXIvJzpp8iwcUyhmB7wtfMz+39L5NP50vQ0QAA"}
+
+[2026-10-16T22:21:12.789Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "bK+8AjXmhNp4l7JUqlx/C1gBffC9fVFPS2oQGc/zP1E=",
+  "facebookId": "",
+  "challengeToken": "7TO7i89r5kKpBGVbfR9ZaQ==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:21:12.790Z]   [diag] *** CONNECT recibido (#1) -> el handshake fue aceptado ***
+
+[2026-10-16T22:21:12.796Z]   -> respuesta Connect (450 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188966,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":0,"settingsUri":"","serverSettings":{"serverTime":1792189272,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823725272,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792189272,"numRings":0,"numRedRings":0,"score":0,"version":268501015}
+
+[2026-10-16T22:21:34.652Z] 
+================ GET /__status ================
+cliente: 127.0.0.1
+cabeceras:
+    User-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; es-VE) WindowsPowerShell/5.1.22621.2428
+    Host: 127.0.0.1:8443
+    Connection: Keep-Alive
+cuerpo (0 bytes):
+(vacio)
+
+[2026-10-16T22:22:06.237Z] 
+================ GET /__status ================
+cliente: 127.0.0.1
+cabeceras:
+    User-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; es-VE) WindowsPowerShell/5.1.22621.2428
+    Host: 127.0.0.1:8443
+    Connection: Keep-Alive
+cuerpo (0 bytes):
+(vacio)
+
+[2026-10-16T22:22:37.684Z] 
+================ GET /__status ================
+cliente: 127.0.0.1
+cabeceras:
+    User-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; es-VE) WindowsPowerShell/5.1.22621.2428
+    Host: 127.0.0.1:8443
+    Connection: Keep-Alive
+cuerpo (0 bytes):
+(vacio)
+
+[2026-10-16T22:23:09.103Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 47
+cuerpo (47 bytes):
+{
+  "cid": 7100722743983405000,
+  "version": 268501015
+}
+
+[2026-10-16T22:23:09.104Z]   [diag] handshake #2 de 192.168.31.83  cid=7100722743983405464
+
+[2026-10-16T22:23:09.105Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"AEpOvrlawf0G3/e4QU8CIA==","challenge":"FzK07Qbf26Hflxgtq3Hg3i3MJ0aY3G+YflLcmEszyx17bA2v9nXKegAA"}
+
+[2026-10-16T22:23:09.291Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 192.168.31.83
+cabeceras:
+    Content-Type: application/x-www-form-urlencoded
+    User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; TECNO BF7 Build/SP1A.210812.016)
+    Host: 192.168.31.161:8443
+    Connection: Keep-Alive
+    Accept-Encoding: gzip
+    Content-Length: 287
+cuerpo (287 bytes):
+{
+  "deviceId": "a0834ef4-b49a-4ef7-8a8e-f6877b146a4b",
+  "numPlays": 0,
+  "lastPlayerId": 0,
+  "mode": 4246,
+  "response": "U2TLOgHCPdriBbL0nvZhSkDE+P1hQ0jT8G/AleweHhk=",
+  "facebookId": "",
+  "challengeToken": "AEpOvrlawf0G3/e4QU8CIA==",
+  "facebookAccessToken": "",
+  "numRedRings": 0,
+  "firstName": "",
+  "numRings": 0,
+  "xp": 0
+}
+
+[2026-10-16T22:23:09.292Z]   [diag] *** CONNECT recibido (#2) -> el handshake fue aceptado ***
+
+[2026-10-16T22:23:09.293Z]   -> respuesta Connect (450 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188966,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":0,"settingsUri":"","serverSettings":{"serverTime":1792189389,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823725389,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792189389,"numRings":0,"numRedRings":0,"score":0,"version":268501015}
+
+[2026-10-16T22:24:10.035Z] 
+================ GET /__status ================
+cliente: 127.0.0.1
+cabeceras:
+    User-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; es-VE) WindowsPowerShell/5.1.22621.2428
+    Host: 127.0.0.1:8443
+    Connection: Keep-Alive
+cuerpo (0 bytes):
+(vacio)
+
+[2026-10-16T22:24:33.413Z] 
+================ POST /SJF23/Handshake.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 46
+cuerpo (46 bytes):
+{
+  "version": 268501015,
+  "cid": 386083227519838400
+}
+
+[2026-10-16T22:24:33.415Z]   [diag] handshake #1 de 127.0.0.1  cid=386083227519838412
+
+[2026-10-16T22:24:33.416Z]   -> respuesta Handshake (127 B): {"status":0,"challengeToken":"pDjWYfVbRa6PwkcNaHbbPw==","challenge":"SLrbSVuNGbIKjzrvmnU4Qajulj7NCTmnHTE3rzyxPqffetxmTukohgAA"}
+
+[2026-10-16T22:24:33.746Z] 
+================ POST /SJF23/Connect.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 171
+cuerpo (171 bytes):
+{
+  "challengeToken": "pDjWYfVbRa6PwkcNaHbbPw==",
+  "response": "xmF1bmN0aW9u",
+  "deviceId": "test-device",
+  "mode": 0,
+  "numPlays": 0,
+  "numRings": 0,
+  "numRedRings": 0,
+  "xp": 0,
+  "lastPlayerId": 0
+}
+
+[2026-10-16T22:24:33.746Z]   [diag] *** CONNECT recibido (#1) -> el handshake fue aceptado ***
+
+[2026-10-16T22:24:33.747Z]   [ZONA] sirviendo currentZone="jungle_zone" nextZone="mechanical_zone" -> la zona jugable cambia a esa
+
+[2026-10-16T22:24:33.747Z]   -> respuesta Connect (450 B): {"status":0,"playerId":1,"isNewAccount":false,"lastLogin":1792188966,"accessToken":"sjf-local-token","uniqueId":"local-0001","cohortId":0,"settingsUri":"","serverSettings":{"serverTime":1792189473,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823725473,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0},"lastUpdate":1792189473,"numRings":0,"numRedRings":0,"score":0,"version":268501015}
+
+[2026-10-16T22:24:33.753Z] 
+================ POST /SJF23/GetSettings.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:33.754Z]   [ZONA] sirviendo currentZone="jungle_zone" nextZone="mechanical_zone" -> la zona jugable cambia a esa
+
+[2026-10-16T22:24:33.754Z]   -> respuesta GetSettings (224 B): {"status":0,"serverSettings":{"serverTime":1792189473,"currentRoundId":1,"currentZone":"jungle_zone","expiryTime":1823725473,"nextZone":"mechanical_zone","nextRoundId":2,"previousZone":"green_hill_zone","previousRoundId":0}}
+
+[2026-10-16T22:24:33.848Z] 
+================ POST /SJF23/GetProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:33.849Z]   -> respuesta GetProfile (776 B): {"status":0,"synchronizedPlayerState":{"lastUpdate":1792189473,"numRings":0,"numRedRings":0,"score":0,"charTokenTime":1792189473,"numCharTokens":0,"redRingTokenTime":1792189473,"numRedRingTokens":0,"numChaoSearches":0,"numGoldTotem":0,"numHoopBoost":0,"numPowerDoubler":0,"numQuickFrenzy":0,"numRingStreak":0,"numTimeExtend":0,"numAnimalDoubler":0,"doubleRings":false,"currentRoundId":1,"spinState":0,"lastFreeSpin":1792189473,"pointsPending":0,"chaoStates":[],"awardFlags":0,"energyCount":5,"energyRechargeTime":1792189473,"lastRateVersion":0,"version":268501015,"ftueState":0,"miscData0":0,"miscData1":0,"numConsecutiveLogins":1,"sonic":0,"tails":0,"knuckles":0,"amy":0,"blaze":0,"vector":0,"shadow":0,"silver":0,"rouge":0,"cream":0},"crc":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:33.865Z] 
+================ POST /SJF23/PushProfile.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:33.866Z]   -> respuesta PushProfile (127 B): {"status":0,"lastUpdate":1792189473,"numRings":0,"numRedRings":0,"score":0,"version":268501015,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.013Z] 
+================ POST /SJF23/GetScores.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.013Z]   -> respuesta GetScores (56 B): {"status":0,"scores":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.018Z] 
+================ POST /SJF23/PostScore.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 11
+cuerpo (11 bytes):
+{
+  "score": 1
+}
+
+[2026-10-16T22:24:34.019Z]   -> respuesta PostScore (63 B): {"status":0,"isHighScore":true,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.024Z] 
+================ POST /SJF23/GetFriends.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.024Z]   -> respuesta GetFriends (57 B): {"status":0,"friends":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.029Z] 
+================ POST /SJF23/GetMessages.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.029Z]   -> respuesta GetMessages (58 B): {"status":0,"messages":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.035Z] 
+================ POST /SJF23/DeleteMessages.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.150Z]   -> respuesta DeleteMessages (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.155Z] 
+================ POST /SJF23/InviteFriend.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.156Z]   -> respuesta InviteFriend (57 B): {"status":0,"invited":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.159Z] 
+================ POST /SJF23/SendGift.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.160Z]   -> respuesta SendGift (69 B): {"status":0,"nextRequest":1792193074,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.164Z] 
+================ POST /SJF23/RequestEnergy.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.165Z]   -> respuesta RequestEnergy (76 B): {"status":0,"requested":[],"nextRequest":[],"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.177Z] 
+================ POST /SJF23/LogIAP.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.178Z]   -> respuesta LogIAP (44 B): {"status":0,"accessToken":"sjf-local-token"}
+
+[2026-10-16T22:24:34.181Z] 
+================ POST /SJF23/AwardRequestItem.json ================
+cliente: 127.0.0.1
+cabeceras:
+    host: 127.0.0.1:18495
+    connection: keep-alive
+    Content-Type: application/json
+    HL-Auth: test
+    accept: */*
+    accept-language: *
+    sec-fetch-mode: cors
+    user-agent: node
+    accept-encoding: gzip, deflate
+    content-length: 2
+cuerpo (2 bytes):
+{}
+
+[2026-10-16T22:24:34.182Z]   -> respuesta AwardRequestItem (44 B): {"status":0,"accessToken":"sjf-local-token"}
+

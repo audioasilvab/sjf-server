@@ -1,0 +1,19 @@
+{
+  "apiBase": "/SJF23",
+  "port": 8443,
+  "host": "0.0.0.0",
+  "currentZone": "jungle_zone",
+  "nextZone": "blue_sky_zone",
+  "previousZone": "green_hill_zone",
+  "currentRoundId": 1,
+  "nextRoundId": 2,
+  "energyCount": 5,
+  "previousRoundId": 0,
+  "dateTimeFormat": "unix",
+  "accessToken": "sjf-local-token",
+  "settingsUri": "",
+  "debug": {
+    "sjunlockAll": false,
+    "debug": false
+  }
+}
