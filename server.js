@@ -265,7 +265,7 @@ function serverSettings() {
   console.log("currentZone: " + ZONES[i], "nextZone: " + ZONES[j])
 
   let object = {
-    serverTime: dt(),
+    serverTime: dt(1000),
     currentRoundId: CONFIG.currentRoundId,
     currentZone: ZONES[i], /*CONFIG.currentZone,*/
     expiryTime: dt(now() + 365 * 0.1 * 3600),
