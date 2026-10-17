@@ -268,7 +268,7 @@ function serverSettings() {
     serverTime: dt(now()),
     currentRoundId: CONFIG.currentRoundId,
     currentZone: ZONES[i], /*CONFIG.currentZone,*/
-    expiryTime: dt(now() + 365 * 0.01 * 3600),
+    expiryTime: dt(now() + 365 * 0.1 * 3600),
     nextZone: ZONES[j]/*CONFIG.nextZone*/,
     numRedRings: 1000,
     nextRoundId: CONFIG.nextRoundId,
