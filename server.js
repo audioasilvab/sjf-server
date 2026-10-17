@@ -268,9 +268,9 @@ function serverSettings() {
     serverTime: dt(now()),
     currentRoundId: CONFIG.currentRoundId,
     currentZone: ZONES[i], /*CONFIG.currentZone,*/
-    expiryTime: dt(now()),
+    expiryTime: dt(now() + 365 * 0.1 * 3600),
     nextZone: ZONES[j]/*CONFIG.nextZone*/,
-    numRedRings: 1000,
+    energyCount: 5,
     nextRoundId: CONFIG.nextRoundId,
     previousZone: CONFIG.previousZone,
     previousRoundId: CONFIG.previousRoundId
