@@ -276,27 +276,7 @@ app.get(`${BASE_PATH}/GetSettings.json`, (req, res) => {
   console.log(' GetSettings');
   res.status(200).json({
     status: 0,
-    serverSettings: getServerSettings(),   // <-- mismo estado global
-    synchronizedPlayerState: {
-      lastUpdate: now,
-      numRings: 1000,
-      numRedRings: 0,
-      score: 0,
-      charTokenTime: now,
-      numCharTokens: 0,
-      redRingTokenTime: now,
-      numRedRingTokens: 0,
-      numChaoSearches: 0,
-      sonic: 0, tails: 0, knuckles: 0, amy: 0, blaze: 0,
-      vector: 0, shadow: 0, silver: 0, rouge: 0, cream: 0,
-      numGoldTotem: 0, numHoopBoost: 0, numPowerDoubler: 0,
-      numQuickFrenzy: 0, numRingStreak: 0, numTimeExtend: 0,
-      numAnimalDoubler: 0,
-      doubleRings: false,
-      currentRoundId: 1,
-      spinState: 0,
-      chaoStates: []                   // OBLIGATORIO, aunque vacío
-    }
+    serverSettings: getServerSettings()   // <-- mismo estado global
   });
 });
 
