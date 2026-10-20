@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Sonic Jump Fever 1.6.1 - servidor propio (Node.js, sin dependencias).
  *
@@ -51,539 +50,308 @@
  *   node sjf-server/server.js --port 8080
  */
 
-'use strict';
-
-const http = require('http');
+const express = require('express');
 const crypto = require('crypto');
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
+const app = express();
 
-const ROOT = __dirname;
-const LOG_DIR = path.join(ROOT, 'logs');
-const RESP_DIR = path.join(ROOT, 'responses');
-const CONTENT_DIR = path.join(ROOT, 'content');
-const CONFIG_PATH = path.join(ROOT, 'config.json');
-const STATE_PATH = path.join(ROOT, 'state.json');
+const PORT = 8443;
+const BASE_PATH = '/SJF23';
 
-// --------------------------------------------------------------- constantes
-// Extraidas del binario (libsonicjumpfever.so):
-const HMAC_KEY = Buffer.from('PvQmck9?y+ZBjgAfqCpa8W67UhTu_D!S\u0000', 'latin1'); // 33 bytes, incluye el NUL
-const NONCE_MAGIC = 0xbdc70e445308c215n;
-const CHALLENGE_SIZE = 42;   // el cliente exige que `challenge` decodifique a 42 bytes
-const API_VERSION = 0x10010017; // valor de `version` que envia el cliente
+// ============================================================
+// ESTADO GLOBAL DE LA RONDA (persistente en memoria)
+// ============================================================
+const ROUND_DURATION_MS = 10 * 60 * 1000; // 10 minutos por ronda
 
-const ZONES = ['green_hill_zone', /*'mountain_zone',*/ 'jungle_zone', 'blue_sky_zone',
-  'mechanical_zone'];
-
-let i = 0 /* currentZone */,
-    j = 1 /* nextZone */;
-
-// ---------------------------------------------------------------- argumentos
-function parseArgs(argv) {
-  const out = { _: [] };
-  for (let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if (a.startsWith('--')) {
-      const key = a.slice(2);
-      const next = argv[i + 1];
-      if (next === undefined || next.startsWith('--')) out[key] = true;
-      else { out[key] = next; i++; }
-    } else out._.push(a);
-  }
-  return out;
-}
-const ARGS = parseArgs(process.argv.slice(2));
-
-// ------------------------------------------------------------------- config
-const DEFAULT_CONFIG = {
-  apiBase: '/SJF23',
-  port: 8443,
-  host: '0.0.0.0',
-  // zona que jugara el cliente
-  currentZone: 'jungle_zone',
-  nextZone: 'mechanical_zone',
-  previousZone: 'green_hill_zone',
-  currentRoundId: 1,
-  nextRoundId: 3,
+// Estado de la ronda actual
+const zoneState = {
+  roundId: 1,
+  zone: 'blue_sky_zone',
+  nextRoundId: 2,
+  nextZone: 'jungle_zone',
   previousRoundId: 0,
-  // formato de los campos DateTime en el JSON: 'unix' (segundos) o 'iso'
-  dateTimeFormat: 'unix',
-  accessToken: 'sjf-local-token',
-  settingsUri: '',
-  energyCount: 5,
-  playerState: {},
-  // opciones de depuracion servidas en serverSettings (probado: el juego las
-  // lee de la configuracion general, no de aqui, pero no molestan)
-  debug: { sjunlockAll: false, debug: false }
+  previousZone: 'blue_sky_zone',
+  startTime: Date.now() // <-- se fija UNA sola vez
 };
 
-function loadConfig() {
-  const cfg = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-  if (fs.existsSync(CONFIG_PATH)) {
-    try {
-      Object.assign(cfg, JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8')));
-    } catch (e) {
-      console.error('config.json invalido:', e.message);
+// Comprueba si la ronda ya expiró y, si es así, rota a la siguiente
+function tickRound() {
+  const now = Date.now();
+  if (now >= zoneState.startTime + ROUND_DURATION_MS) {
+    // Rotar
+    zoneState.previousRoundId = zoneState.roundId;
+    zoneState.previousZone = zoneState.zone;
+
+    zoneState.roundId = zoneState.nextRoundId;
+    zoneState.zone = zoneState.nextZone;
+
+    // Siguiente (puedes poner una lista/rotación real)
+    zoneState.nextRoundId = zoneState.roundId + 1;
+    zoneState.nextZone = pickNextZone(zoneState.zone);
+
+    // Avanzar startTime en múltiplos exactos para no acumular drift
+    while (now >= zoneState.startTime + ROUND_DURATION_MS) {
+      zoneState.startTime += ROUND_DURATION_MS;
     }
-  }
-  if (ARGS.port) cfg.port = Number(ARGS.port);
-  if (ARGS.host) cfg.host = ARGS.host;
-  if (ARGS.zone) cfg.currentZone = ARGS.zone;
-  if (ARGS['date-time-format']) cfg.dateTimeFormat = ARGS['date-time-format'];
-  return cfg;
-}
-let CONFIG = loadConfig();
 
-// Recarga en caliente: si editas config.json (por ejemplo para cambiar de zona)
-// se aplica en la siguiente peticion, sin reiniciar el servidor.
-let configMtime = 0;
-try { configMtime = fs.statSync(CONFIG_PATH).mtimeMs; } catch (_) { /* aun no existe */ }
-function maybeReloadConfig() {
-  try {
-    const m = fs.statSync(CONFIG_PATH).mtimeMs;
-    if (m !== configMtime) {
-      configMtime = m;
-      const next = loadConfig();
-      const zoneChanged = next.currentZone !== CONFIG.currentZone;
-      CONFIG = next;
-      console.log(`[config] recargado${zoneChanged ? ' -> zona: ' + CONFIG.currentZone : ''}`);
-    }
-  } catch (_) { /* ignora */ }
-}
-
-// ------------------------------------------------------------------- estado
-function loadState() {
-  try {
-    return JSON.parse(fs.readFileSync(STATE_PATH, 'utf8'));
-  } catch (_) {
-    return { playerId: 1, uniqueId: 'local-0001', cohortId: 0, plays: 0 };
+    console.log(` Ronda rotada → roundId=${zoneState.roundId}, zone=${zoneState.zone}`);
   }
 }
-const STATE = loadState();
-function saveState() {
-  try { fs.writeFileSync(STATE_PATH, JSON.stringify(STATE, null, 2)); } catch (_) {}
+
+function pickNextZone(current) {
+  const zones = ['mechanical_zone', 'blue_sky_zone', 'green_hill_zone', 'jungle_zone'];
+  const idx = zones.indexOf(current);
+  return zones[(idx + 1) % zones.length];
 }
 
-// ------------------------------------------------------------------ logging
-for (const d of [LOG_DIR, RESP_DIR, CONTENT_DIR]) fs.mkdirSync(d, { recursive: true });
-if (!fs.existsSync(CONFIG_PATH)) {
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(DEFAULT_CONFIG, null, 2));
-}
-const LOG_FILE = path.join(LOG_DIR, 'requests.log');
-function logBlock(text) {
-  process.stdout.write(text);
-  fs.appendFile(LOG_FILE, `[${new Date().toISOString()}] ${text}\n`, () => {});
-}
-function hexDump(buf, limit = 256) {
-  const lines = [];
-  const slice = buf.subarray(0, limit);
-  for (let i = 0; i < slice.length; i += 16) {
-    const c = slice.subarray(i, i + 16);
-    lines.push('      ' + i.toString(16).padStart(4, '0') + '  ' +
-      [...c].map((b) => b.toString(16).padStart(2, '0')).join(' '));
-  }
-  if (buf.length > limit) lines.push(`      ... (${buf.length - limit} bytes mas)`);
-  return lines.join('\n');
-}
-function bodyText(buf) {
-  if (buf.length === 0) return '(vacio)';
-  const printable = [...buf.subarray(0, 200)].every(
-    (b) => b === 9 || b === 10 || b === 13 || (b >= 32 && b < 127) || b >= 128);
-  if (!printable) return '(binario)\n' + hexDump(buf);
-  const t = buf.toString('utf8');
-  try { return JSON.stringify(JSON.parse(t), null, 2); } catch (_) { return t; }
-}
-
-// ------------------------------------------------------- DateTime y utilidades
-function now() { return Math.floor(Date.now() / 1000); }
-function dt(seconds) {
-  if (CONFIG.dateTimeFormat === 'iso') return new Date(seconds * 1000).toISOString();
-  return seconds;
-}
-
-// --------------------------------------------------------------- handshake
-/**
- * El cliente (ConnectedProfileManager::handshakeCompleteCallback) hace:
- *   1. decodifica en base64 el campo `challenge`  -> debe dar 42 bytes
- *   2. coge los bytes [32..40) de ese buffer       -> llamemosle R (u64 LE)
- *   3. calcula M = (R * 0xbdc70e445308c215) XOR cid     <-- OJO AL XOR
- *   4. calcula HMAC-SHA256(clave = "PvQmck9?...!S\0" (33 bytes),
- *                          datos = u64le(cid) || u64le(M))
- *   5. compara ese HMAC con los bytes [0..32) del buffer decodificado
- *
- * Del desensamblado (arm64) de handshakeCompleteCallback:
- *   0x4B84E0  movz/movk x10 = 0xBDC70E445308C215
- *   0x4B84E4  ldr  x0,  [x29, #0x90]   ; R = reto[32..40)
- *   0x4B8508  madd x10, x0, x10, xzr   ; x10 = R * MAGIC
- *   0x4B851C  eor  x10, x10, x12       ; x10 ^= cid      <-- este era el que faltaba
- *   0x4B8548  str  x12, [x29, #0x40]   ; datos[0..8)  = cid
- *   0x4B854C  str  x10, [x29, #0x48]   ; datos[8..16) = (R*MAGIC) ^ cid
- *
- * Por eso el servidor construye el challenge como HMAC || R || 2 bytes de relleno.
- */
-function buildChallenge(cid) {
-  const rBytes = crypto.randomBytes(8);
-  const R = rBytes.readBigUInt64LE(0);
-  const M = ((((R * NONCE_MAGIC) & 0xFFFFFFFFFFFFFFFFn) ^ cid)) & 0xFFFFFFFFFFFFFFFFn;
-
-  const data = Buffer.alloc(16);
-  data.writeBigUInt64LE(cid & 0xFFFFFFFFFFFFFFFFn, 0);
-  data.writeBigUInt64LE(M, 8);
-
-  const hmac = crypto.createHmac('sha256', HMAC_KEY).update(data).digest();
-  const decoded = Buffer.concat([hmac, rBytes, Buffer.alloc(CHALLENGE_SIZE - 40)]);
-  return decoded.toString('base64');
-}
-
-function parseCid(value, rawBody) {
-  // IMPORTANTE: `cid` es un entero de 64 bits. JSON.parse lo redondearia si
-  // supera 2^53, asi que primero se busca el literal exacto en el cuerpo crudo.
-  if (rawBody) {
-    const m = /"cid"\s*:\s*(-?\d{1,20})/.exec(rawBody);
-    if (m) {
-      try { return BigInt(m[1]); } catch (_) { /* sigue */ }
-    }
-    const ms = /"cid"\s*:\s*"([^"]*)"/.exec(rawBody);
-    if (ms) return parseCid(ms[1], null);
-  }
-  try {
-    if (typeof value === 'bigint') return value;
-    if (typeof value === 'number') return BigInt(Math.trunc(value));
-    if (typeof value === 'string') {
-      const t = value.trim();
-      if (/^-?\d+$/.test(t)) return BigInt(t);
-      const b = Buffer.from(t, 'base64');
-      if (b.length >= 8) return b.readBigUInt64LE(0);
-    }
-  } catch (_) { /* ignora */ }
-  return 0n;
-}
-
-// --------------------------------------------------------------- respuestas
-function serverSettings() {
-  console.log("currentZone: " + ZONES[i], "nextZone: " + ZONES[j])
-
-  let object = {
-    serverTime: dt(now()),
-    currentRoundId: CONFIG.currentRoundId,
-    currentZone: ZONES[i], /*CONFIG.currentZone,*/
-    expiryTime: dt(now() + 365 * 0.1 * 3600),
-    nextZone: ZONES[j]/*CONFIG.nextZone*/,
-    energyCount: 5,
-    nextRoundId: CONFIG.nextRoundId,
-    previousZone: CONFIG.previousZone,
-    previousRoundId: CONFIG.previousRoundId
-  }
-
-  i = (i + 1) % 4;
-  j = (j + 1) % 4;
-
-  return object;
-}
-
-/**
- * network::SynchronizedPlayerState, 43 campos, extraidos del desensamblado de
- * su deserialize (arm64 0x32D778). Tipos IMPORTANTES:
- *   - los diez campos de personaje son long (int64), no int
- *   - `chaoStates` es un vector y es OBLIGATORIO
- * Se generan todos para que deserialize() no falle por un campo que falta.
- */
-function synchronizedPlayerState() {
-  const t = now();
-  const s = {
-    lastUpdate: dt(t),
-    numRings: 0,
-    numRedRings: 1000,
-    score: 0,
-    charTokenTime: dt(t),
-    numCharTokens: 0,
-    redRingTokenTime: dt(t),
-    numRedRingTokens: 0,
-    numChaoSearches: 0,
-    numGoldTotem: 0,
-    numHoopBoost: 0,
-    numPowerDoubler: 0,
-    numQuickFrenzy: 0,
-    numRingStreak: 0,
-    numTimeExtend: 0,
-    numAnimalDoubler: 0,
-    doubleRings: false,
-    currentRoundId: CONFIG.currentRoundId,
-    spinState: 0,
-    lastFreeSpin: dt(t),
-    pointsPending: 0,
-    chaoStates: [],            // OBLIGATORIO
-    awardFlags: 0,
-    energyCount: CONFIG.energyCount !== undefined ? CONFIG.energyCount : 5,
-    energyRechargeTime: dt(t),
-    lastRateVersion: 0,
-    version: API_VERSION,
-    ftueState: 0,
-    miscData0: 0,
-    miscData1: 0,
-    numConsecutiveLogins: 1
+// Helper para construir el objeto serverSettings siempre coherente
+function getServerSettings() {
+  tickRound();
+  const now = Math.floor(Date.now());
+  return {
+    serverTime: now,
+    currentRoundId: zoneState.roundId,
+    currentZone: zoneState.zone,
+    expiryTime: Math.floor((zoneState.startTime + ROUND_DURATION_MS)),
+    nextZone: zoneState.nextZone,
+    nextRoundId: zoneState.nextRoundId,
+    previousZone: zoneState.previousZone,
+    previousRoundId: zoneState.previousRoundId
   };
-  for (const c of ['sonic', 'tails', 'knuckles', 'amy', 'blaze', 'vector',
-    'shadow', 'silver', 'rouge', 'cream']) {
-    s[c] = 1;                  // long (int64)
-  }
-  Object.assign(s, CONFIG.playerState || {});
-  return s;
 }
 
-function baseResponse(name, req, rawBody) {
-  const token = CONFIG.accessToken;
-  switch (name) {
-    case 'Handshake': {
-      const cid = parseCid(req && req.cid, rawBody);
-      return {
-        status: 0,
-        challengeToken: crypto.randomBytes(16).toString('base64'),
-        challenge: buildChallenge(cid)
-      };
-    }
-    case 'Connect': {
-      const isNew = STATE.newAccount !== false;
-      if (isNew) {
-        STATE.newAccount = false;
-        STATE.lastLogin = now();
-        saveState();
-      }
-      return {
-        status: 0,
-        playerId: STATE.playerId,
-        isNewAccount: isNew,
-        lastLogin: dt(STATE.lastLogin || now()),
-        accessToken: token,
-        uniqueId: STATE.uniqueId,
-        // OJO: cohortId es un `long` (int64) en network::ConnectResponse. Si se
-        // envia como cadena, deserialize() falla y el cliente reintenta Connect
-        // con retroceso exponencial. Ver PROTOCOLO.md §4.
-        cohortId: Number(STATE.cohortId) || 0,
-        settingsUri: CONFIG.settingsUri,
-        serverSettings: serverSettings(),
-        lastUpdate: dt(now()),
-        numRings: STATE.numRings || 0,
-        numRedRings: 1000 || 0,
-        score: STATE.score || 0,
-        version: API_VERSION
-      };
-    }
-    case 'GetSettings':
-      return { status: 0, serverSettings: serverSettings() };
-    case 'GetProfile':
-      return {
-        status: 0,
-        synchronizedPlayerState: synchronizedPlayerState(),
-        crc: 0,
-        accessToken: token
-      };
-    case 'PushProfile':
-      return {
-        status: 0,
-        lastUpdate: dt(now()),
-        numRings: 0,
-        numRedRings: 1000,
-        score: 0,
-        version: API_VERSION,
-        accessToken: token
-      };
-    case 'GetScores':
-      return { status: 0, scores: [], accessToken: token };
-    case 'PostScore':
-      return { status: 0, isHighScore: true, accessToken: token };
-    case 'GetFriends':
-      return { status: 0, friends: [], accessToken: token };
-    case 'GetMessages':
-      return { status: 0, messages: [], accessToken: token };
-    case 'DeleteMessages':
-      return { status: 0, accessToken: token };
-    case 'InviteFriend':
-      return { status: 0, invited: [], accessToken: token };
-    case 'SendGift':
-      return { status: 0, nextRequest: dt(now() + 3600), accessToken: token };
-    case 'RequestEnergy':
-      return { status: 0, requested: [], nextRequest: [], accessToken: token };
-    case 'LogIAP':
-      return { status: 0, accessToken: token };
-    case 'AwardRequestItem':
-      return { status: 0, accessToken: token };
-    default:
-      return { status: 0 };
-  }
-}
+// Clave de 32 bytes + NUL = 33 bytes (extraída del .so, ver PROTOCOLO.md §3)
+const HMAC_KEY = Buffer.concat([
+  Buffer.from('PvQmck9?y+ZBjgAfqCpa8W67UhTu_D!S', 'ascii'),
+  Buffer.from([0x00])
+]);
 
-function responseFor(name, req, rawBody) {
-  for (const cand of [`${name}.json`, `${name}.json.txt`]) {
-    const p = path.join(RESP_DIR, cand);
-    if (fs.existsSync(p)) {
-      try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
-      catch (e) { console.error(`  !! ${cand} invalido: ${e.message}`); }
-    }
-  }
-  return baseResponse(name, req, rawBody);
-}
+// Constante del algoritmo (PROTOCOLO.md §3)
+const MULT = 0xBDC70E445308C215n;
 
-// -------------------------------------------------------------------- HTTP
-function send(res, code, body, type = 'application/json') {
-  const buf = Buffer.isBuffer(body) ? body : Buffer.from(String(body), 'utf8');
-  res.writeHead(code, {
-    'Content-Type': type,
-    'Content-Length': buf.length,
-    // Connection: close evita que un cliente que lea hasta el fin del flujo se
-    // quede esperando; es lo mas conservador posible.
-    'Connection': 'close'
-  });
-  res.end(buf);
-}
-
-// ------------------------------------------------------------ diagnostico
-// Huella del propio codigo, para poder comprobar de un vistazo si el servidor
-// que esta corriendo es el ultimo (aparece en el arranque y en /__status).
-let CODE_VERSION = 'desconocida';
-try {
-  CODE_VERSION = crypto.createHash('sha256')
-    .update(fs.readFileSync(__filename)).digest('hex').slice(0, 12);
-} catch (_) { /* ignora */ }
-
-// El juego reintenta el handshake cada ~14 s y nunca manda /Connect.json.
-// Estos contadores ayudan a ver que esta pasando en cada ciclo.
-const STATS = { codeVersion: CODE_VERSION, handshakes: 0, connects: 0, other: {}, clients: {}, lastHandshake: null };
-function noteRequest(name, ip, body) {
-  if (name === 'Handshake') {
-    STATS.handshakes++;
-    STATS.clients[ip] = (STATS.clients[ip] || 0) + 1;
-    let cid = null;
-    const m = /"cid"\s*:\s*(-?\d{1,20})/.exec(body || '');
-    if (m) cid = m[1];
-    const prev = STATS.lastHandshake;
-    if (prev && prev.cid === cid) {
-      logBlock(`  !! el cliente REPITE el mismo cid (${cid}) -> esta reintentando el handshake\n`);
-    }
-    STATS.lastHandshake = { cid, at: Date.now(), ip };
-    logBlock(`  [diag] handshake #${STATS.handshakes} de ${ip}  cid=${cid}\n`);
-  } else if (name === 'Connect') {
-    STATS.connects++;
-    logBlock(`  [diag] *** CONNECT recibido (#${STATS.connects}) -> el handshake fue aceptado ***\n`);
-  } else {
-    STATS.other[name] = (STATS.other[name] || 0) + 1;
-  }
-}
-
-function serveFile(req, res, full) {
-  const norm = path.normalize(full);
-  if (!norm.startsWith(CONTENT_DIR) || !fs.existsSync(norm) || !fs.statSync(norm).isFile()) {
-    logBlock(`  !! contenido no encontrado: ${full}\n`);
-    return send(res, 404, JSON.stringify({ error: 'not found' }));
-  }
-  const size = fs.statSync(norm).size;
-  let start = 0, end = size - 1, code = 200;
-  const m = req.headers.range && /bytes=(\d*)-(\d*)/.exec(req.headers.range);
-  if (m) {
-    if (m[1]) start = parseInt(m[1], 10);
-    if (m[2]) end = parseInt(m[2], 10);
-    code = 206;
-  }
-  const headers = {
-    'Content-Type': norm.endsWith('.json') ? 'application/json'
-      : norm.endsWith('.xml') ? 'application/xml' : 'application/octet-stream',
-    'Content-Length': end - start + 1,
-    'Accept-Ranges': 'bytes'
-  };
-  if (code === 206) headers['Content-Range'] = `bytes ${start}-${end}/${size}`;
-  logBlock(`  -> fichero ${path.basename(norm)} (${size} bytes, ${code})\n`);
-  res.writeHead(code, headers);
-  fs.createReadStream(norm, { start, end }).pipe(res);
-}
-
-const ENDPOINT_RE = /^\/([A-Za-z0-9_]+)\.json$/;
-
-const server = http.createServer((req, res) => {
-  const chunks = [];
-  req.on('data', (c) => chunks.push(c));
+// ============================================================
+// PARSER FLEXIBLE + CAPTURA DE CID EXACTO
+// ============================================================
+app.use((req, res, next) => {
+  let raw = '';
+  req.on('data', (chunk) => { raw += chunk.toString('binary'); });
   req.on('end', () => {
-    maybeReloadConfig();
-    const body = Buffer.concat(chunks);
-    const clean = (req.url || '/').split('?')[0];
-    const base = CONFIG.apiBase || '';
-    let rel = clean.startsWith(base) ? clean.slice(base.length) : clean;
-    rel = rel.replace(/^\/+/, '');
+    req.rawBody = raw;
 
-    const headerLines = [];
-    for (let i = 0; i < req.rawHeaders.length; i += 2) {
-      headerLines.push(`    ${req.rawHeaders[i]}: ${req.rawHeaders[i + 1]}`);
-    }
-    logBlock(`\n================ ${req.method} ${req.url} ================\n` +
-      `cliente: ${req.socket.remoteAddress}\n` +
-      `cabeceras:\n${headerLines.join('\n')}\n` +
-      `cuerpo (${body.length} bytes):\n${bodyText(body)}\n`);
+    // Extraer cid EXACTO como BigInt (para que no pierda precisión el JSON.parse)
+    const cidMatch = raw.match(/"cid"\s*:\s*(-?\d+)/);
+    req.cidExact = cidMatch ? BigInt(cidMatch[1]) : null;
 
-    let parsed = {};
-    try { parsed = JSON.parse(body.toString('utf8')); } catch (_) { /* no json */ }
+    // Extraer version también
+    const versionMatch = raw.match(/"version"\s*:\s*(\d+)/);
+    req.version = versionMatch ? parseInt(versionMatch[1], 10) : 0;
 
-    if (rel === '__log') {
-      const data = fs.existsSync(LOG_FILE) ? fs.readFileSync(LOG_FILE) : Buffer.from('');
-      return send(res, 200, data, 'text/plain; charset=utf-8');
-    }
-    if (rel === '__config') return send(res, 200, JSON.stringify(CONFIG, null, 2));
-    if (rel === '__state') return send(res, 200, JSON.stringify(STATE, null, 2));
-    if (rel === '__health') return send(res, 200, JSON.stringify({ ok: true }));
-    if (rel === '__status') return send(res, 200, JSON.stringify(STATS, null, 2));
-    if (rel === '__zones') return send(res, 200, JSON.stringify(ZONES));
-
-    if (rel.startsWith('content/') || /\.(sla|xml|dat|sav)$/i.test(rel)) {
-      return serveFile(req, res, path.join(CONTENT_DIR, rel));
+    // Parsear el body normal (con BigInt para cid)
+    const trimmed = raw.trim();
+    if (trimmed.startsWith('{')) {
+      try {
+        req.body = JSON.parse(trimmed, (key, value) => {
+          if (key === 'cid' && typeof value === 'number' && !Number.isSafeInteger(value)) {
+            return String(value); // conservar como string si excede safe integer
+          }
+          return value;
+        });
+      } catch (e) {
+        req.body = {};
+      }
+    } else {
+      req.body = {};
     }
 
-    const m = ENDPOINT_RE.exec('/' + rel);
-    if (!m) {
-      logBlock(`  !! ruta desconocida, devuelvo {} (200)\n`);
-      return send(res, 200, '{}');
-    }
-
-    const name = m[1];
-    noteRequest(name, req.socket.remoteAddress, body.toString('utf8'));
-    const payload = responseFor(name, parsed, body.toString('utf8'));
-    if ((name === 'Connect' || name === 'GetSettings') && payload.serverSettings) {
-      logBlock(`  [ZONA] sirviendo currentZone="${payload.serverSettings.currentZone}"` +
-        ` nextZone="${payload.serverSettings.nextZone}" -> la zona jugable cambia a esa\n`);
-    }
-    const json = JSON.stringify(payload);
-    logBlock(`  -> respuesta ${name} (${json.length} B): ${json}\n`);
-    send(res, 200, json);
+    next();
   });
 });
 
-function localIPs() {
-  const out = [];
-  const ifaces = os.networkInterfaces();
-  for (const name of Object.keys(ifaces)) {
-    for (const i of ifaces[name] || []) {
-      if (i.family === 'IPv4' && !i.internal) out.push(i.address);
-    }
+app.use((req, res, next) => {
+  const ts = new Date().toISOString();
+  console.log(`\n[${ts}] ${req.method} ${req.originalUrl} ← ${req.ip}`);
+  if (req.rawBody) console.log(`    Raw: ${req.rawBody}`);
+  next();
+});
+
+// ============================================================
+// UTILIDADES HMAC
+// ============================================================
+
+function u64le(value) {
+  // Acepta BigInt o Number, devuelve Buffer de 8 bytes little-endian
+  const buf = Buffer.alloc(8);
+  let v = BigInt(value) & 0xFFFFFFFFFFFFFFFFn; // forzar a 64 bits sin signo
+  for (let i = 0; i < 8; i++) {
+    buf[i] = Number(v & 0xFFn);
+    v >>= 8n;
   }
-  return out;
+  return buf;
 }
 
-server.listen(CONFIG.port, CONFIG.host, () => {
-  const base = CONFIG.apiBase || '';
-  console.log('=========================================================');
-  console.log(' Sonic Jump Fever 1.6.1 - servidor propio');
-  console.log(' codigo: ' + CODE_VERSION);
-  console.log('=========================================================');
-  console.log(` escuchando en   http://${CONFIG.host}:${CONFIG.port}${base}`);
-  console.log(' URL para el APK parcheado:');
-  for (const ip of localIPs()) console.log(`    http://${ip}:${CONFIG.port}${base}`);
-  console.log('');
-  console.log(` ZONA ACTUAL     ${CONFIG.currentZone}`);
-  console.log(` zona siguiente  ${CONFIG.nextZone}`);
-  console.log(` zona anterior   ${CONFIG.previousZone}`);
-  console.log(` formato fechas  ${CONFIG.dateTimeFormat}`);
-  console.log('');
-  console.log(` log             ${LOG_FILE}`);
-  console.log(` ver por web     http://localhost:${CONFIG.port}/__log`);
-  console.log(` respuestas      ${RESP_DIR}\\<Endpoint>.json`);
-  console.log(' Ctrl+C para parar.');
-  console.log('');
+function buildChallenge(cid) {
+  // cid = BigInt con signo, tal como lo envió el cliente
+  // M = (R * MULT mod 2^64) XOR cid   (todo en 64 bits)
+  const cidU64 = BigInt.asUintN(64, cid);
+
+  // Elegir R aleatorio de 64 bits
+  const R = crypto.randomBytes(8).readBigUInt64LE(0);
+
+  // M = (R * MULT mod 2^64) XOR cid
+  const mulResult = (R * MULT) & 0xFFFFFFFFFFFFFFFFn;
+  const M = mulResult ^ cidU64;
+
+  // data = u64le(cid) || u64le(M)
+  const data = Buffer.concat([u64le(cidU64), u64le(M)]);
+
+  // HMAC-SHA256(clave33, data) = 32 bytes
+  const hmac = crypto.createHmac('sha256', HMAC_KEY).update(data).digest();
+
+  // challenge = hmac(32) || u64le(R)(8) || relleno(2) = 42 bytes
+  const challengeBuf = Buffer.concat([
+    hmac,
+    u64le(R),
+    Buffer.from([0x00, 0x00])  // relleno de 2 bytes para llegar a 42
+  ]);
+
+  return {
+    challenge: challengeBuf.toString('base64'),
+    challengeToken: crypto.randomBytes(16).toString('hex'),
+    R, M, cidU64
+  };
+}
+
+// ============================================================
+// ENDPOINTS
+// ============================================================
+
+app.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
+  const cid = req.cidExact;
+  if (cid === null) {
+    console.log(' No se pudo extraer cid del body');
+    return res.status(400).json({ status: 1 });
+  }
+
+  console.log(` HANDSHAKE: cid=${cid}, version=0x${req.version.toString(16).toUpperCase()}`);
+
+  const { challenge, challengeToken } = buildChallenge(cid);
+
+  const response = {
+    status: 0,
+    challengeToken,
+    challenge
+  };
+
+  console.log(`   → challenge (${Buffer.from(challenge, 'base64').length} bytes): ${challenge.substring(0, 20)}...`);
+  res.status(200).json(response);
+});
+
+let inicio = Date.now();
+let fin = Date.now();
+
+app.post(`${BASE_PATH}/Connect.json`, (req, res) => {
+  const now = Math.floor(Date.now());
+  console.log(' CONNECT recibido');
+
+  const response = {
+    status: 0,
+    playerId: 1,
+    isNewAccount: false,
+    lastLogin: now,
+    accessToken: "devtoken",
+    uniqueId: "local-0001",
+    cohortId: 0,
+    settingsUri: `${BASE_PATH}/GetSettings.json`,
+    serverSettings: getServerSettings(),   // <-- coherente y persistente
+    lastUpdate: now,
+    numRings: 0,
+    numRedRings: 0,
+    score: 0,
+    version: req.body?.version || 0
+  };
+
+  res.status(200).json(response);
+});
+
+app.get(`${BASE_PATH}/GetSettings.json`, (req, res) => {
+  console.log(' GetSettings');
+  res.status(200).json({
+    status: 0,
+    serverSettings: getServerSettings(),   // <-- mismo estado global
+    synchronizedPlayerState: {
+      lastUpdate: now,
+      numRings: 1000,
+      numRedRings: 0,
+      score: 0,
+      charTokenTime: now,
+      numCharTokens: 0,
+      redRingTokenTime: now,
+      numRedRingTokens: 0,
+      numChaoSearches: 0,
+      sonic: 0, tails: 0, knuckles: 0, amy: 0, blaze: 0,
+      vector: 0, shadow: 0, silver: 0, rouge: 0, cream: 0,
+      numGoldTotem: 0, numHoopBoost: 0, numPowerDoubler: 0,
+      numQuickFrenzy: 0, numRingStreak: 0, numTimeExtend: 0,
+      numAnimalDoubler: 0,
+      doubleRings: false,
+      currentRoundId: 1,
+      spinState: 0,
+      chaoStates: []                   // OBLIGATORIO, aunque vacío
+    }
+  });
+});
+
+app.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
+  console.log(' GetProfile');
+  const now = Math.floor(Date.now() / 1000);
+  res.status(200).json({
+    status: 0,
+    crc: 0,
+    accessToken: "devtoken",
+    synchronizedPlayerState: {
+      lastUpdate: now,
+      numRings: 0,
+      numRedRings: 0,
+      score: 0,
+      charTokenTime: now,
+      numCharTokens: 0,
+      redRingTokenTime: now,
+      numRedRingTokens: 0,
+      numChaoSearches: 0,
+      sonic: 0, tails: 0, knuckles: 0, amy: 0, blaze: 0,
+      vector: 0, shadow: 0, silver: 0, rouge: 0, cream: 0,
+      numGoldTotem: 0, numHoopBoost: 0, numPowerDoubler: 0,
+      numQuickFrenzy: 0, numRingStreak: 0, numTimeExtend: 0,
+      numAnimalDoubler: 0,
+      doubleRings: false,
+      currentRoundId: 1,
+      spinState: 0,
+      chaoStates: []                   // OBLIGATORIO, aunque vacío
+    }
+  });
+});
+
+// Placeholders para el resto
+[
+  'PushProfile.json', 'GetScores.json', 'PostScore.json',
+  'GetFriends.json', 'GetMessages.json', 'DeleteMessages.json',
+  'SendGift.json', 'RequestEnergy.json', 'AwardRequestItem.json',
+  'InviteFriend.json', 'LogIAP.json'
+].forEach(endpoint => {
+  app.post(`${BASE_PATH}/${endpoint}`, (req, res) => {
+    console.log(`⚠ ${endpoint}`);
+    res.status(200).json({ status: 0, accessToken: "devtoken" });
+  });
+});
+
+app.use(BASE_PATH, (req, res) => {
+  console.log(`❌ 404: ${req.method} ${req.originalUrl}`);
+  res.status(404).json({ status: 1 });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log('============================================================');
+  console.log(' Servidor SJF23 (handshake HMAC) corriendo');
+  console.log('============================================================');
+  console.log(`   http://192.168.31.161:${PORT}${BASE_PATH}`);
+  console.log('============================================================');
 });
