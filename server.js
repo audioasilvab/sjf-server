@@ -60,7 +60,7 @@ const BASE_PATH = '/SJF23';
 // ============================================================
 // ESTADO GLOBAL DE LA RONDA (persistente en memoria)
 // ============================================================
-const ROUND_DURATION_MS = 10 * 60 * 1000; // 10 minutos por ronda
+const ROUND_DURATION_MS = 5 * 60 * 1000; // 5 minutos por ronda
 
 // Estado de la ronda actual
 const zoneState = {
