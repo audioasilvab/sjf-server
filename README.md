@@ -1,6 +1,6 @@
 <div align="center">
 
-![logo](images/_i.png)
+<img src="images/_i.png" width=400>
 
 # SJF-Server
 
