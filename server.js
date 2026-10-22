@@ -65,7 +65,7 @@ const ROUND_DURATION_MS = 5 * 60 * 1000; // 5 minutos por ronda
 // Estado de la ronda actual
 const zoneState = {
   roundId: 1,
-  zone: 'blue_sky_zone',
+  zone: 'green_hill_zone',
   nextRoundId: 2,
   nextZone: 'jungle_zone',
   previousRoundId: 0,
