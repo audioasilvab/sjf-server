@@ -23,7 +23,7 @@ La comunicación entre **SJF-Server** y el juego está hecha en Node.js y esto s
 En la carpeta `_tools/` encontrarán scripts de automatización que facilitaron la descompilación y modificación de los archivos del juego, entre las más importantes:
 
 - `patch_so.py`: modificar la dirección del servidor original en el `.so` por una diferente a la que se comunicará con el juego.
-- `sla.py`: extrae contenido en los archivos `.sla`, y en `settings.sla` (que es utilizado para configurar valores globales del juego) extrae archivos `.json` y `.xml`.
+- `sla.py`: extrae contenido en los archivos `.sla`, y en `settings.sla` extrae archivos `.json` y `.xml`. `settings.sla` es la configuración de valores globales del juego.
 - `apk_build.py`: reempaqueta la aplicación con los cambios aplicados.
 - `a64xref.py`: ver referencias en los binarios `.so`.
 - `a64func.py`: buscador de cadenas específicas en el binario.
