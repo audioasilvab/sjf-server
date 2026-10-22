@@ -21,3 +21,7 @@ La comunicación entre **SJF-Server** y el juego está hecha en Node.js y esto s
 > El parche del `.so` fue realizada con la ultima versión del juego lanzado el 31 de marzo de 2017, la cual fué la `1.6.1`.
 
 En la carpeta `tools/` encontrarán scripts de automatización que facilitaron la descompilación y modificación de los archivos del juego, entre esos archivos incluyendo la que parcheó el `.so`:
+
+- `patch_so.py`: modificar la dirección del servidor original en el `.so` por una diferente a la que puedas comunicarte con el juego.
+- `sla.py`: extrae archivos en los `.sla` como `settings.sla` (que es uilizado para configurar valores globales del juego).
+- `apk_build.py`: reempaqueta la aplicación con los cambios aplicados.
