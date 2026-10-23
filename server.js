@@ -108,7 +108,7 @@ function getServerSettings() {
   tickRound();
   const now = Math.floor(Date.now());
   return {
-    serverTime: now,
+    serverTime: 0,
     currentRoundId: zoneState.roundId,
     currentZone: zoneState.zone,
     expiryTime: Math.floor((zoneState.startTime + ROUND_DURATION_MS)),
