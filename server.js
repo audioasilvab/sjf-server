@@ -237,8 +237,8 @@ app.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
 
   const response = {
     status: 0,
-    challengeToken,
-    challenge
+    challengeToken
+    
   };
 
   console.log(`   → challenge (${Buffer.from(challenge, 'base64').length} bytes): ${challenge.substring(0, 20)}...`);
