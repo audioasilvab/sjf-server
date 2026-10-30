@@ -32,3 +32,7 @@ En la carpeta `_tools/` encontrarán scripts de automatización que facilitaron 
 - `apk_build.py`: Reempaqueta la aplicación con los cambios aplicados.
 - `a64xref.py`: Ver referencias en los binarios `.so`.
 - `a64func.py`: Buscador de cadenas específicas en el binario.
+
+<div align="center">
+  <img src="images/Screenshot_01.jpg" height=420>
+</div>
