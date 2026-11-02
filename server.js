@@ -1,5 +1,5 @@
 /**
- * Sonic Jump Fever 1.6.1 - servidor propio (Node.js, sin dependencias).
+ * Sonic Jump Fever 1.6.1 - servidor propio (Node.js y Express.js).
  *
  * PROTOCOLO RECONSTRUIDO POR INGENIERIA INVERSA
  * =============================================
@@ -39,15 +39,10 @@
  * serverSettings (network::ServerSettings) es lo que decide LA ZONA:
  *     { serverTime, currentRoundId, currentZone, expiryTime,
  *       nextZone, nextRoundId, previousZone, previousRoundId }
- * Zonas validas: green_hill_zone, mountain_zone, jungle_zone,
+ * Zonas validas: green_hill_zone, mountain_zone (está referenciado sin datos), jungle_zone,
  *                blue_sky_zone, mechanical_zone
  *
  * El handshake es un reto-respuesta HMAC-SHA256 (ver verifyChallenge()).
- *
- * Uso:
- *   node sjf-server/server.js
- *   node sjf-server/server.js --zone jungle_zone
- *   node sjf-server/server.js --port 8080
  */
 
 const express = require('express');
