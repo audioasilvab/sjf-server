@@ -47,10 +47,28 @@
 
 const express = require('express');
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 const app = express();
 
-const PORT = 8443;
-const BASE_PATH = '/SJF23';
+// ============================================================
+// CONFIGURACION (config.json)
+// ============================================================
+const CONFIG_PATH = path.join(__dirname, 'config.json');
+
+let config = {};
+try {
+  config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+  console.log(` Configuración cargada desde ${CONFIG_PATH}`);
+} catch (err) {
+  console.warn(`⚠ No se pudo cargar config.json (${err.message}); usando valores por defecto.`);
+}
+
+const PORT = config.port ?? 8443;
+const HOST = config.host ?? '0.0.0.0';
+const BASE_PATH = config.apiBase ?? '/SJF23';
+const ACCESS_TOKEN = config.accessToken ?? 'devtoken';
+const SETTINGS_URI = config.settingsUri || `${BASE_PATH}/GetSettings.json`;
 
 // ============================================================
 // ESTADO GLOBAL DE LA RONDA (persistente en memoria)
@@ -59,12 +77,12 @@ const ROUND_DURATION_MS = 5 * 60 * 1000; // 5 minutos por ronda
 
 // Estado de la ronda actual
 const zoneState = {
-  roundId: 1,
-  zone: 'mechanical_zone',
-  nextRoundId: 2,
-  nextZone: 'jungle_zone',
-  previousRoundId: 0,
-  previousZone: 'blue_sky_zone',
+  roundId: config.currentRoundId ?? 1,
+  zone: config.currentZone ?? 'mechanical_zone',
+  nextRoundId: config.nextRoundId ?? 2,
+  nextZone: config.nextZone ?? 'jungle_zone',
+  previousRoundId: config.previousRoundId ?? 0,
+  previousZone: config.previousZone ?? 'blue_sky_zone',
   startTime: Date.now() // <-- se fija UNA sola vez
 };
 
@@ -252,10 +270,10 @@ app.post(`${BASE_PATH}/Connect.json`, (req, res) => {
     playerId: 1,
     isNewAccount: false,
     lastLogin: now,
-    accessToken: "devtoken",
+    accessToken: ACCESS_TOKEN,
     uniqueId: "local-0001",
     cohortId: 0,
-    settingsUri: `${BASE_PATH}/GetSettings.json`,
+    settingsUri: SETTINGS_URI,
     serverSettings: getServerSettings(),   // <-- coherente y persistente
     lastUpdate: now,
     numRings: 0,
@@ -281,7 +299,7 @@ app.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
   res.status(200).json({
     status: 0,
     crc: 0,
-    accessToken: "devtoken",
+    accessToken: ACCESS_TOKEN,
     synchronizedPlayerState: {
       lastUpdate: now,
       numRings: 0,
@@ -314,7 +332,7 @@ app.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
 ].forEach(endpoint => {
   app.post(`${BASE_PATH}/${endpoint}`, (req, res) => {
     console.log(`⚠ ${endpoint}`);
-    res.status(200).json({ status: 0, accessToken: "devtoken" });
+    res.status(200).json({ status: 0, accessToken: ACCESS_TOKEN });
   });
 });
 
@@ -323,10 +341,11 @@ app.use(BASE_PATH, (req, res) => {
   res.status(404).json({ status: 1 });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, HOST, () => {
   console.log('============================================================');
   console.log(' Servidor SJF23 (handshake HMAC) corriendo');
   console.log('============================================================');
-  console.log(`   http://192.168.31.161:${PORT}${BASE_PATH}`);
+  console.log(`   http://${HOST}:${PORT}${BASE_PATH}`);
+  console.log(`   Zona actual: ${zoneState.zone} (roundId=${zoneState.roundId})`);
   console.log('============================================================');
 });
