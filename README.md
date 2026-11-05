@@ -33,7 +33,6 @@ En la carpeta `_tools/` encontrarán scripts de automatización que facilitaron 
 - `a64xref.py`: Ver referencias en los binarios `.so`.
 - `a64func.py`: Buscador de cadenas específicas en el binario.
 
----
 
 ## ¿Cómo funciona el servidor?
 
