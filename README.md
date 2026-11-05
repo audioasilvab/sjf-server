@@ -75,7 +75,7 @@ Los endpoints de progreso, puntuaciones, amigos, mensajes, regalos, energía y c
 
 El objeto `serverSettings` es el que decide **qué zona está activa**. Incluye `serverTime`, `currentZone`, `nextZone`, `previousZone`, `expiryTime` y los IDs de ronda.
 
-- Cada ronda dura **5 minutos**.
+- Cada ronda dura **10 minutos**.
 - Al expirar, el servidor rota automáticamente entre las zonas: `mechanical_zone → blue_sky_zone → green_hill_zone → jungle_zone`.
 - El estado se mantiene coherente entre peticiones y el tiempo de inicio se avanza en múltiplos exactos para no acumular desfase.
 
