@@ -2,7 +2,7 @@
   "apiBase": "/SJF23",
   "port": 8443,
   "host": "0.0.0.0",
-  "currentZone": "jungle_zone",
+  "currentZone": "mechanical_zone",
   "nextZone": "blue_sky_zone",
   "previousZone": "green_hill_zone",
   "currentRoundId": 1,
