@@ -35,7 +35,7 @@ En la carpeta `_tools/` encontrarán scripts de automatización que facilitaron 
 
 ## ¿Cómo funciona el servidor?
 
-El servidor está escrito en **Node.js** con **Express** y actúa como reemplazo del backend original de SEGA. Al iniciar carga su configuración desde `config.json` y queda escuchando en el puerto **8443**, bajo la ruta base **`/SJF23`** (la misma que usaba el juego original).
+Al estar escrito en **Node.js** con **Express**, actúa como reemplazo del backend original de SEGA. Al iniciar carga su configuración desde `config.json` y queda escuchando en el puerto **8443**, bajo la ruta base **`/SJF23`** (la misma que usaba el juego original).
 
 La comunicación es **JSON plano**: tanto las peticiones como las respuestas son objetos JSON en la raíz, sin ningún envoltorio. El flujo que sigue el juego es:
 
