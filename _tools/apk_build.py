@@ -15,7 +15,7 @@ Uso
     python _tools/apk_build.py patch --url http://192.168.1.50:8443/SJF23
     python _tools/apk_build.py patch --url http://192.168.1.50:8443/SJF23 --target-sdk 24
 
-Por defecto lee  "sonic-jump-fever-1-6-1 (1).apk"  y escribe
+Por defecto lee  "sonic-jump-fever-1-6-1.apk"  y escribe
 "sonic-jump-fever-1-6-1-PARCHEADO.apk" en la raiz del proyecto.
 """
 import argparse
@@ -34,7 +34,7 @@ import axml  # noqa: E402
 ORIGINAL_URL = b'https://prod.server.sjf.hla.sega.co.uk:8443/SJF23'
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-DEFAULT_APK = os.path.join(ROOT, 'sonic-jump-fever-1-6-1 (1).apk')
+DEFAULT_APK = os.path.join(ROOT, 'sonic-jump-fever-1-6-1.apk')
 SIGN_PREFIXES = ('META-INF/MANIFEST.MF',)
 SIGN_SUFFIXES = ('.SF', '.RSA', '.DSA', '.EC')
 
