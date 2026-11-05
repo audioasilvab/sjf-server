@@ -258,9 +258,6 @@ app.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
   res.status(200).json(response);
 });
 
-let inicio = Date.now();
-let fin = Date.now();
-
 app.post(`${BASE_PATH}/Connect.json`, (req, res) => {
   const now = Math.floor(Date.now());
   console.log(' CONNECT recibido');
