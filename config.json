@@ -7,9 +7,7 @@
   "previousZone": "green_hill_zone",
   "currentRoundId": 1,
   "nextRoundId": 2,
-  "energyCount": 5,
   "previousRoundId": 0,
-  "dateTimeFormat": "unix",
   "accessToken": "sjf-local-token",
   "settingsUri": "",
   "debug": {
