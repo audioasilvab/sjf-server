@@ -33,7 +33,6 @@ En la carpeta `_tools/` encontrarán scripts de automatización que facilitaron 
 - `a64xref.py`: Ver referencias en los binarios `.so`.
 - `a64func.py`: Buscador de cadenas específicas en el binario.
 
-
 ## ¿Cómo funciona el servidor?
 
 El servidor está escrito en **Node.js** con **Express** y actúa como reemplazo del backend original de SEGA. Al iniciar carga su configuración desde `config.json` y queda escuchando en el puerto **8443**, bajo la ruta base **`/SJF23`** (la misma que usaba el juego original).
