@@ -4,7 +4,7 @@
 
 <h1>SJF-Server</h1>
 
-**Servidor propio y protocolo reconstruido por ingeniería inversa para Sonic Jump Fever**
+**Servidor propio y protocolo reconstruido mediante ingeniería inversa para Sonic Jump Fever**
 
 </div>
 
