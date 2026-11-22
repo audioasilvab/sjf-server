@@ -21,7 +21,7 @@ Anteriormente **Sonic Jump Fever** debía conetarse con a un servidor privativo 
 <img src="images/currentZone" height=20>
 <img src="images/nextZone" height=20>
 
-La comunicación entre **SJF-Server** y el juego está hecha en Node.js y esto se logró parcheando el archivo `sonicjumpfever.so` del APK original ubicado en `lib/arm64-v8a`, `lib/armeabi`, `armeabi-v7a` (según la arquitectura), y se cambió la dirección URL del servidor (anteriormente era `https://prod.server.sjf.hla.sega.co.uk:8443/SJF23`) por una dirección IP local independiente al original con el objetivo para ver el tráfico, peticiones y las llamadas que hacía al servidor.
+La comunicación entre **SJF-Server** y el juego está hecha en Node.js y esto se logró parcheando el archivo `sonicjumpfever.so` del APK original ubicado en `lib/arm64-v8a`, `lib/armeabi`, `armeabi-v7a` (según la arquitectura), y se cambió la dirección URL del servidor (anteriormente era `https://prod.server.sjf.hla.sega.co.uk:8443/SJF23`) por una dirección IP independiente para ver el tráfico, las peticiones y llamadas que hacía al servidor.
 
 > El parche del `.so` fue realizada con la ultima versión del juego lanzado el 31 de marzo de 2017, la cual fué la `1.6.1`.
 
