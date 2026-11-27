@@ -1,5 +1,4 @@
 const express = require('express');
-//const crypto = require('crypto');
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
@@ -50,9 +49,9 @@ app.use((req, res, next) => {
 const CONNECT   = require('./routes/connect');
 const SETTINGS  = require('./routes/settings');
 const PROFILE   = require('./routes/profile');
-const HANDSHAKE = require('./routes/handshake');   // ← nuevo
+const HANDSHAKE = require('./routes/handshake');
 
-app.use(BASE_PATH, HANDSHAKE);                     // ← nuevo
+app.use(BASE_PATH, HANDSHAKE);
 app.use(BASE_PATH, CONNECT);
 app.use(BASE_PATH, SETTINGS);
 app.use(BASE_PATH, PROFILE);
@@ -182,7 +181,6 @@ app.post(`${BASE_PATH}/GetScores.json`, (req, res) => {
   }
 });
 
-
 app.post(`${BASE_PATH}/PostScore.json`, (req, res) => {
   const body = req.body || {};
   score = body.score;
@@ -190,8 +188,6 @@ app.post(`${BASE_PATH}/PostScore.json`, (req, res) => {
 
   res.status(200).json({ status: 0, isHighScore: true, accessToken: ACCESS_TOKEN });
 });
-
-
 
 app.post(`${BASE_PATH}/GetMessages.json`, (req, res) => {
   let pending = []
@@ -274,8 +270,6 @@ app.get(['/v2.7/me', '/v2.7/me/'], (req, res) => {
     link: `https://facebook.com/${'100001'}`
   });
 });
-
-
 
 app.use('/v2.7', (req, res) => {
   console.log(` FB Graph emulado: ${req.method} ${req.originalUrl}`);

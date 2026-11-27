@@ -59,9 +59,6 @@ function buildChallenge(cid) {
   };
 }
 
-// ============================================================
-// RUTA
-// ============================================================
 router.post('/Handshake.json', (req, res) => {
   const cid = req.cidExact;
   if (cid === null) {
