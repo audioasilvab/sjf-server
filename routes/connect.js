@@ -8,7 +8,7 @@ const { getServerSettings } = require('../getServerSettings');
 router.post(`/Connect.json`, (req, res) => {
   const body = req.body || {};
 
-  PLAYER.deviceId = body.deviceId;
+  //PLAYER.deviceId = body.deviceId;
   PLAYER.facebook.firstName = body.firstName;
   PLAYER.facebook.facebookId = body.facebookId;
   PLAYER.facebook.facebookAccessToken = body.facebookAccessToken;

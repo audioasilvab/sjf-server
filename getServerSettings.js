@@ -16,7 +16,7 @@ function tickRound() {
     ZONE_STATE.previousRoundId = ZONE_STATE.roundId;
     ZONE_STATE.previousZone = ZONE_STATE.zone;
 
-    ZONE_STATE.roundId = ZONE_STATE.nextRoundId + Math.floor(Math.random() * 350001)/* + parseInt(Math.random() * 100)*/;
+    ZONE_STATE.roundId = ZONE_STATE.nextRoundId;
     ZONE_STATE.zone = ZONE_STATE.nextZone;
 
     // Siguiente (puedes poner una lista/rotación real)
@@ -30,7 +30,7 @@ function tickRound() {
 
     try {
     	fs.writeFileSync(path.join(__dirname, '/data/zone.json'), JSON.stringify(ZONE_STATE, null, 2), 'utf8');
-	    console.log(' 💾 Partida guardada en save.json');
+	    console.log(' Partida guardada en save.json');
 	  } catch (e) {
 	    console.error(' Error al guardar:', e);
 	  }

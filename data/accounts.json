@@ -1,0 +1,1518 @@
+{
+  "version": 1,
+  "nextPlayerId": 8,
+  "accounts": [
+    {
+      "playerId": 1,
+      "accessToken": "4c071446117c212d23c92184138049a8924b1758b8c0c6f9",
+      "uniqueId": "local-0001",
+      "cohortId": 0,
+      "firstName": "Sonic Player",
+      "facebookId": "96",
+      "facebookAccessToken": "devtoken",
+      "deviceId": "",
+      "keys": [
+        "facebook:96"
+      ],
+      "playerState": {
+        "lastUpdate": 1795470270085,
+        "numRings": 3296,
+        "numRedRings": 20,
+        "score": 2638168,
+        "charTokenTime": 0,
+        "numCharTokens": 0,
+        "redRingTokenTime": 0,
+        "numRedRingTokens": 0,
+        "numChaoSearches": 1,
+        "sonic": 1,
+        "tails": 1,
+        "knuckles": 1,
+        "amy": 1,
+        "blaze": 1,
+        "vector": 1,
+        "shadow": 1,
+        "silver": 1,
+        "rouge": 0,
+        "cream": 0,
+        "numGoldTotem": 0,
+        "numHoopBoost": 1,
+        "numPowerDoubler": 3,
+        "numQuickFrenzy": 0,
+        "numRingStreak": 0,
+        "numTimeExtend": 0,
+        "numAnimalDoubler": 0,
+        "doubleRings": true,
+        "currentRoundId": 1,
+        "spinState": 0,
+        "lastFreeSpin": 0,
+        "pointsPending": 0,
+        "chaoStates": [
+          {
+            "collectTime": 0,
+            "type": 11,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 15,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 1,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 12,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 16,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 2,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 13,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 3,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 23,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 14,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 4,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 24,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 6,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 18,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 26,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 7,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 19,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 27,
+            "state": 0
+          }
+        ],
+        "awardFlags": 1148932,
+        "energyCount": 5,
+        "energyRechargeTime": 0,
+        "lastRateVersion": 0,
+        "version": 9,
+        "ftueState": 7,
+        "miscData0": 2,
+        "miscData1": 1,
+        "numConsecutiveLogins": 0,
+        "lastLogin": 1795470262309
+      },
+      "friends": [
+        {
+          "playerId": 2,
+          "firstName": "serginandsegasonic",
+          "facebookId": "100002",
+          "lastLogin": 1795364205946,
+          "score": 4210,
+          "nextGift": 1795476290081,
+          "nextEnergy": 1795458204311
+        },
+        {
+          "playerId": 3,
+          "firstName": "Friend 0098",
+          "facebookId": "100098",
+          "lastLogin": 1795454225960,
+          "score": 1862,
+          "nextGift": 0,
+          "nextEnergy": 1795458204821
+        },
+        {
+          "playerId": 4,
+          "firstName": "Friend 2186",
+          "facebookId": "2186",
+          "lastLogin": 1795469625977,
+          "score": 8229,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 5,
+          "firstName": "Friend 285",
+          "facebookId": "285",
+          "lastLogin": 1795469641170,
+          "score": 2582,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 6,
+          "firstName": "Friend 210",
+          "facebookId": "210",
+          "lastLogin": 1795470268042,
+          "score": 7262,
+          "nextGift": 0,
+          "nextEnergy": 0
+        }
+      ],
+      "messages": [
+        {
+          "messageId": 6,
+          "senderId": 4,
+          "messageType": 4,
+          "createdOn": 1795469625977
+        },
+        {
+          "messageId": 7,
+          "senderId": 1,
+          "messageType": 5,
+          "createdOn": 1795469626005
+        },
+        {
+          "messageId": 8,
+          "senderId": 5,
+          "messageType": 4,
+          "createdOn": 1795469641170
+        },
+        {
+          "messageId": 9,
+          "senderId": 6,
+          "messageType": 4,
+          "createdOn": 1795470268042
+        }
+      ],
+      "pendingReplies": [],
+      "nextMessageId": 10,
+      "lastMessageTime": 1795470268042,
+      "nextFriendPlayerId": 7,
+      "weekKey": 2968,
+      "weeklyResultKey": 2968,
+      "previousWeekScores": [
+        {
+          "playerId": 1,
+          "score": 80851155,
+          "data": 0
+        },
+        {
+          "playerId": 4,
+          "score": 8229,
+          "data": 0
+        },
+        {
+          "playerId": 2,
+          "score": 4210,
+          "data": 0
+        },
+        {
+          "playerId": 3,
+          "score": 1862,
+          "data": 0
+        }
+      ]
+    },
+    {
+      "playerId": 3,
+      "accessToken": "22eb284d615570b243fed48a58551443d0d2af4b2bcf3f1a",
+      "uniqueId": "local-0003",
+      "cohortId": 0,
+      "firstName": "Sonic Player",
+      "facebookId": "",
+      "facebookAccessToken": "",
+      "deviceId": "",
+      "keys": [
+        "client:192.168.31.112"
+      ],
+      "playerState": {
+        "lastUpdate": 1795472582767,
+        "numRings": 1000,
+        "numRedRings": 1000,
+        "score": 589824,
+        "charTokenTime": 1795454861450,
+        "numCharTokens": 0,
+        "redRingTokenTime": 1795454861450,
+        "numRedRingTokens": 0,
+        "numChaoSearches": 0,
+        "sonic": 0,
+        "tails": 0,
+        "knuckles": 0,
+        "amy": 0,
+        "blaze": 0,
+        "vector": 0,
+        "shadow": 0,
+        "silver": 0,
+        "rouge": 0,
+        "cream": 0,
+        "numGoldTotem": 0,
+        "numHoopBoost": 0,
+        "numPowerDoubler": 0,
+        "numQuickFrenzy": 0,
+        "numRingStreak": 0,
+        "numTimeExtend": 0,
+        "numAnimalDoubler": 0,
+        "doubleRings": false,
+        "currentRoundId": 1,
+        "spinState": 0,
+        "lastFreeSpin": 0,
+        "pointsPending": 0,
+        "chaoStates": [],
+        "awardFlags": 1048576,
+        "energyCount": 0,
+        "energyRechargeTime": 0,
+        "lastRateVersion": 0,
+        "version": 9,
+        "ftueState": 7,
+        "miscData0": 0,
+        "miscData1": 1,
+        "numConsecutiveLogins": 0,
+        "lastLogin": 1795472582767
+      },
+      "friends": [
+        {
+          "playerId": 2,
+          "firstName": "serginandsegasonic",
+          "facebookId": "100002",
+          "lastLogin": 1795364205946,
+          "score": 4210,
+          "nextGift": 0,
+          "nextEnergy": 0
+        }
+      ],
+      "messages": [
+        {
+          "messageId": 1,
+          "senderId": 2,
+          "messageType": 2,
+          "createdOn": 1795454801450
+        }
+      ],
+      "pendingReplies": [],
+      "nextMessageId": 2,
+      "lastMessageTime": 1795454801450,
+      "nextFriendPlayerId": 4,
+      "weekKey": null,
+      "weeklyResultKey": null,
+      "previousWeekScores": []
+    },
+    {
+      "playerId": 4,
+      "accessToken": "f9bb3ff0bb0597fed7bf11451ab977d21c7a3b4d72de56f0",
+      "uniqueId": "local-0004",
+      "cohortId": 0,
+      "firstName": "Sonic Player",
+      "facebookId": "614796800092022",
+      "facebookAccessToken": "sjf1.NjE0Nzk2ODAwMDkyMDIy.PSTCCzQYBx7Nl7uoB6-0cU",
+      "deviceId": "",
+      "keys": [
+        "facebook:614796800092022"
+      ],
+      "playerState": {
+        "lastUpdate": 1795459866692,
+        "numRings": 12427,
+        "numRedRings": 98,
+        "score": 460384,
+        "charTokenTime": 1795455065000,
+        "numCharTokens": 13,
+        "redRingTokenTime": 1795455065000,
+        "numRedRingTokens": 4,
+        "numChaoSearches": 0,
+        "sonic": 16777217,
+        "tails": 21474836481,
+        "knuckles": 8589934592,
+        "amy": 0,
+        "blaze": 0,
+        "vector": 0,
+        "shadow": 0,
+        "silver": 8589934592,
+        "rouge": 0,
+        "cream": 0,
+        "numGoldTotem": 3,
+        "numHoopBoost": 0,
+        "numPowerDoubler": 12,
+        "numQuickFrenzy": 0,
+        "numRingStreak": 0,
+        "numTimeExtend": 0,
+        "numAnimalDoubler": 1,
+        "doubleRings": false,
+        "currentRoundId": 1,
+        "spinState": 0,
+        "lastFreeSpin": 0,
+        "pointsPending": 0,
+        "chaoStates": [
+          {
+            "collectTime": 0,
+            "type": 11,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 15,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 1,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 12,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 16,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 2,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 13,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 3,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 23,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 14,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 4,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 24,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 6,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 18,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 26,
+            "state": 0
+          },
+          {
+            "collectTime": 1795455568493,
+            "type": 7,
+            "state": 6
+          },
+          {
+            "collectTime": 0,
+            "type": 19,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 27,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 5,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 17,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 25,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 8,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 20,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 28,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 9,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 21,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 29,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 10,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 22,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 30,
+            "state": 0
+          }
+        ],
+        "awardFlags": 1089519,
+        "energyCount": 4,
+        "energyRechargeTime": 1795458969881,
+        "lastRateVersion": 0,
+        "version": 9,
+        "ftueState": 7,
+        "miscData0": 0,
+        "miscData1": 1,
+        "numConsecutiveLogins": 1,
+        "lastLogin": 1795459866692
+      },
+      "friends": [
+        {
+          "playerId": 2,
+          "firstName": "serginandsegasonic",
+          "facebookId": "100002",
+          "lastLogin": 1795365037866,
+          "score": 4210,
+          "nextGift": 1795477195998,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 5,
+          "firstName": "Friend 0098",
+          "facebookId": "100098",
+          "lastLogin": 1795459806901,
+          "score": 1862,
+          "nextGift": 0,
+          "nextEnergy": 0
+        }
+      ],
+      "messages": [
+        {
+          "messageId": 3,
+          "senderId": 5,
+          "messageType": 4,
+          "createdOn": 1795459806901
+        }
+      ],
+      "pendingReplies": [],
+      "nextMessageId": 4,
+      "lastMessageTime": 1795459806901,
+      "nextFriendPlayerId": 6,
+      "weekKey": 2968,
+      "weeklyResultKey": null,
+      "previousWeekScores": []
+    },
+    {
+      "playerId": 5,
+      "accessToken": "ee564f9fdc4ed81bb49919563dc83dad64854657e78360bc",
+      "uniqueId": "local-0005",
+      "cohortId": 0,
+      "firstName": "Sonic Player",
+      "facebookId": "424637571609387",
+      "facebookAccessToken": "sjf1.NDI0NjM3NTcxNjA5Mzg3.Xxo8Y1i7UcSgDEJiRUm0CM",
+      "deviceId": "",
+      "keys": [
+        "facebook:424637571609387"
+      ],
+      "playerState": {
+        "lastUpdate": 1795460512143,
+        "numRings": 734,
+        "numRedRings": 36,
+        "score": 283506,
+        "charTokenTime": 1795459896000,
+        "numCharTokens": 19,
+        "redRingTokenTime": 1795459896000,
+        "numRedRingTokens": 7,
+        "numChaoSearches": 0,
+        "sonic": 1,
+        "tails": 8589934592,
+        "knuckles": 0,
+        "amy": 0,
+        "blaze": 0,
+        "vector": 0,
+        "shadow": 0,
+        "silver": 8589934592,
+        "rouge": 0,
+        "cream": 0,
+        "numGoldTotem": 4,
+        "numHoopBoost": 2,
+        "numPowerDoubler": 0,
+        "numQuickFrenzy": 0,
+        "numRingStreak": 0,
+        "numTimeExtend": 0,
+        "numAnimalDoubler": 0,
+        "doubleRings": false,
+        "currentRoundId": 1,
+        "spinState": 0,
+        "lastFreeSpin": 0,
+        "pointsPending": 0,
+        "chaoStates": [
+          {
+            "collectTime": 0,
+            "type": 11,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 15,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 1,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 12,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 16,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 2,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 13,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 3,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 23,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 14,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 4,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 24,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 6,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 18,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 26,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 7,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 19,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 27,
+            "state": 0
+          }
+        ],
+        "awardFlags": 1081825,
+        "energyCount": 4,
+        "energyRechargeTime": 1795460198639,
+        "lastRateVersion": 0,
+        "version": 9,
+        "ftueState": 5,
+        "miscData0": 2,
+        "miscData1": 1,
+        "numConsecutiveLogins": 0,
+        "lastLogin": 1795460512143
+      },
+      "friends": [
+        {
+          "playerId": 2,
+          "firstName": "serginandsegasonic",
+          "facebookId": "100002",
+          "lastLogin": 1795369893835,
+          "score": 4210,
+          "nextGift": 1795482123664,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 6,
+          "firstName": "Friend 0098",
+          "facebookId": "100098",
+          "lastLogin": 1795460417837,
+          "score": 1862,
+          "nextGift": 0,
+          "nextEnergy": 0
+        }
+      ],
+      "messages": [
+        {
+          "messageId": 3,
+          "senderId": 5,
+          "messageType": 5,
+          "createdOn": 1795460487975
+        }
+      ],
+      "pendingReplies": [
+        {
+          "due": 1795460643664,
+          "senderId": 2,
+          "messageType": 2
+        }
+      ],
+      "nextMessageId": 4,
+      "lastMessageTime": 1795460487975,
+      "nextFriendPlayerId": 7,
+      "weekKey": 2968,
+      "weeklyResultKey": 2968,
+      "previousWeekScores": [
+        {
+          "playerId": 5,
+          "score": 352380,
+          "data": 0
+        },
+        {
+          "playerId": 2,
+          "score": 4210,
+          "data": 0
+        },
+        {
+          "playerId": 6,
+          "score": 1862,
+          "data": 0
+        }
+      ]
+    },
+    {
+      "playerId": 6,
+      "accessToken": "38034ba3f0f7da0c9b8ef2f4579fb0e1c4c208be82546039",
+      "uniqueId": "local-0006",
+      "cohortId": 0,
+      "firstName": "Sonic Player",
+      "facebookId": "408914171967056",
+      "facebookAccessToken": "sjf1.NDA4OTE0MTcxOTY3MDU2.HMkkY_pjsfvuxWqD07oJv0",
+      "deviceId": "",
+      "keys": [
+        "facebook:408914171967056"
+      ],
+      "playerState": {
+        "lastUpdate": 1795468729051,
+        "numRings": 2192,
+        "numRedRings": 53,
+        "score": 211336,
+        "charTokenTime": 1795460562000,
+        "numCharTokens": 16,
+        "redRingTokenTime": 1795460562000,
+        "numRedRingTokens": 7,
+        "numChaoSearches": 0,
+        "sonic": 1,
+        "tails": 12884901888,
+        "knuckles": 0,
+        "amy": 0,
+        "blaze": 0,
+        "vector": 0,
+        "shadow": 0,
+        "silver": 0,
+        "rouge": 0,
+        "cream": 0,
+        "numGoldTotem": 4,
+        "numHoopBoost": 0,
+        "numPowerDoubler": 0,
+        "numQuickFrenzy": 0,
+        "numRingStreak": 0,
+        "numTimeExtend": 0,
+        "numAnimalDoubler": 1,
+        "doubleRings": false,
+        "currentRoundId": 1,
+        "spinState": 0,
+        "lastFreeSpin": 0,
+        "pointsPending": 0,
+        "chaoStates": [
+          {
+            "collectTime": 0,
+            "type": 11,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 15,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 1,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 12,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 16,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 2,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 13,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 3,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 23,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 14,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 4,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 24,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 6,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 18,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 26,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 7,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 19,
+            "state": 0
+          },
+          {
+            "collectTime": 0,
+            "type": 27,
+            "state": 0
+          }
+        ],
+        "awardFlags": 1149417,
+        "energyCount": 5,
+        "energyRechargeTime": 0,
+        "lastRateVersion": 0,
+        "version": 9,
+        "ftueState": 7,
+        "miscData0": 2,
+        "miscData1": 1,
+        "numConsecutiveLogins": 0,
+        "lastLogin": 1795468672796
+      },
+      "friends": [
+        {
+          "playerId": 2,
+          "firstName": "Tails",
+          "facebookId": "100002",
+          "lastLogin": 1795370558587,
+          "score": 4200,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 3,
+          "firstName": "Knuckles",
+          "facebookId": "100003",
+          "lastLogin": 1795370558587,
+          "score": 3850,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 4,
+          "firstName": "Amy",
+          "facebookId": "100004",
+          "lastLogin": 1795370558587,
+          "score": 3120,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 5,
+          "firstName": "Shadow",
+          "facebookId": "100005",
+          "lastLogin": 1795370558587,
+          "score": 5400,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 7,
+          "firstName": "Friend 0098",
+          "facebookId": "100098",
+          "lastLogin": 1795461162440,
+          "score": 1862,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 8,
+          "firstName": "Friend aaaa",
+          "facebookId": "aaaaa",
+          "lastLogin": 1795461568633,
+          "score": 5151,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 9,
+          "firstName": "Friend 1",
+          "facebookId": "1",
+          "lastLogin": 1795461818391,
+          "score": 2027,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 10,
+          "firstName": "Friend 2",
+          "facebookId": "2",
+          "lastLogin": 1795465237931,
+          "score": 3174,
+          "nextGift": 0,
+          "nextEnergy": 1795468999672
+        },
+        {
+          "playerId": 11,
+          "firstName": "Friend 252",
+          "facebookId": "252",
+          "lastLogin": 1795465974784,
+          "score": 6618,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 12,
+          "firstName": "Friend 255",
+          "facebookId": "255",
+          "lastLogin": 1795466047584,
+          "score": 7765,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 13,
+          "firstName": "Friend 226",
+          "facebookId": "226",
+          "lastLogin": 1795466681462,
+          "score": 1593,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 14,
+          "firstName": "Friend 220",
+          "facebookId": "220",
+          "lastLogin": 1795466766697,
+          "score": 4858,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 15,
+          "firstName": "Friend 2161",
+          "facebookId": "2161",
+          "lastLogin": 1795467248047,
+          "score": 4011,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 16,
+          "firstName": "Friend 2179",
+          "facebookId": "2179",
+          "lastLogin": 1795467362216,
+          "score": 5163,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 17,
+          "firstName": "Friend 237",
+          "facebookId": "237",
+          "lastLogin": 1795467663061,
+          "score": 6636,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 18,
+          "firstName": "Friend 254",
+          "facebookId": "254",
+          "lastLogin": 1795467681194,
+          "score": 2382,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 19,
+          "firstName": "Friend 228",
+          "facebookId": "228",
+          "lastLogin": 1795467866841,
+          "score": 2916,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 20,
+          "firstName": "Friend 215",
+          "facebookId": "215",
+          "lastLogin": 1795467905246,
+          "score": 6115,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 21,
+          "firstName": "Friend 2151",
+          "facebookId": "2151",
+          "lastLogin": 1795468173901,
+          "score": 8878,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 22,
+          "firstName": "Friend 289",
+          "facebookId": "289",
+          "lastLogin": 1795468622873,
+          "score": 7170,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 23,
+          "firstName": "Friend 2105",
+          "facebookId": "2105",
+          "lastLogin": 1795468643665,
+          "score": 3209,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 24,
+          "firstName": "Friend 253",
+          "facebookId": "253",
+          "lastLogin": 1795468719462,
+          "score": 4500,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 25,
+          "firstName": "Friend 28",
+          "facebookId": "28",
+          "lastLogin": 1795468727164,
+          "score": 8533,
+          "nextGift": 0,
+          "nextEnergy": 0
+        }
+      ],
+      "messages": [
+        {
+          "messageId": 3,
+          "senderId": 6,
+          "messageType": 9,
+          "createdOn": 1795460711150
+        },
+        {
+          "messageId": 8,
+          "senderId": 10,
+          "messageType": 1,
+          "createdOn": 1795465828339
+        },
+        {
+          "messageId": 9,
+          "senderId": 11,
+          "messageType": 4,
+          "createdOn": 1795465974784
+        },
+        {
+          "messageId": 10,
+          "senderId": 12,
+          "messageType": 4,
+          "createdOn": 1795466047584
+        },
+        {
+          "messageId": 11,
+          "senderId": 13,
+          "messageType": 4,
+          "createdOn": 1795466681462
+        },
+        {
+          "messageId": 12,
+          "senderId": 14,
+          "messageType": 4,
+          "createdOn": 1795466766698
+        },
+        {
+          "messageId": 13,
+          "senderId": 15,
+          "messageType": 4,
+          "createdOn": 1795467248047
+        },
+        {
+          "messageId": 14,
+          "senderId": 16,
+          "messageType": 4,
+          "createdOn": 1795467362216
+        },
+        {
+          "messageId": 15,
+          "senderId": 17,
+          "messageType": 4,
+          "createdOn": 1795467663062
+        },
+        {
+          "messageId": 16,
+          "senderId": 18,
+          "messageType": 4,
+          "createdOn": 1795467681194
+        },
+        {
+          "messageId": 17,
+          "senderId": 19,
+          "messageType": 4,
+          "createdOn": 1795467866841
+        },
+        {
+          "messageId": 18,
+          "senderId": 20,
+          "messageType": 4,
+          "createdOn": 1795467905246
+        },
+        {
+          "messageId": 19,
+          "senderId": 21,
+          "messageType": 4,
+          "createdOn": 1795468173901
+        },
+        {
+          "messageId": 20,
+          "senderId": 22,
+          "messageType": 4,
+          "createdOn": 1795468622873
+        },
+        {
+          "messageId": 21,
+          "senderId": 23,
+          "messageType": 4,
+          "createdOn": 1795468643665
+        },
+        {
+          "messageId": 22,
+          "senderId": 24,
+          "messageType": 4,
+          "createdOn": 1795468719463
+        },
+        {
+          "messageId": 23,
+          "senderId": 25,
+          "messageType": 4,
+          "createdOn": 1795468727164
+        }
+      ],
+      "pendingReplies": [],
+      "nextMessageId": 24,
+      "lastMessageTime": 1795468727164,
+      "nextFriendPlayerId": 26,
+      "weekKey": 2968,
+      "weeklyResultKey": 2968,
+      "previousWeekScores": [
+        {
+          "playerId": 5,
+          "score": 5400,
+          "data": 0
+        },
+        {
+          "playerId": 2,
+          "score": 4200,
+          "data": 0
+        },
+        {
+          "playerId": 3,
+          "score": 3850,
+          "data": 0
+        },
+        {
+          "playerId": 4,
+          "score": 3120,
+          "data": 0
+        },
+        {
+          "playerId": 6,
+          "score": 0,
+          "data": 0
+        }
+      ]
+    },
+    {
+      "playerId": 7,
+      "accessToken": "813b88a39b75f95351faf6fafc9b3bedcb59fdf356de467e",
+      "uniqueId": "local-0007",
+      "cohortId": 0,
+      "firstName": "Sonic Player",
+      "facebookId": "812487064773730",
+      "facebookAccessToken": "sjf1.ODEyNDg3MDY0NzczNzMw.gcWuuF4iYpIk1RTlFJ5s47",
+      "deviceId": "",
+      "keys": [
+        "facebook:812487064773730"
+      ],
+      "playerState": {
+        "lastUpdate": 1795472300256,
+        "numRings": 785,
+        "numRedRings": 50,
+        "score": 194137,
+        "charTokenTime": 1795470347000,
+        "numCharTokens": 18,
+        "redRingTokenTime": 1795470347000,
+        "numRedRingTokens": 9,
+        "numChaoSearches": 0,
+        "sonic": 1,
+        "tails": 0,
+        "knuckles": 0,
+        "amy": 0,
+        "blaze": 0,
+        "vector": 0,
+        "shadow": 0,
+        "silver": 17179869184,
+        "rouge": 0,
+        "cream": 0,
+        "numGoldTotem": 4,
+        "numHoopBoost": 1,
+        "numPowerDoubler": 0,
+        "numQuickFrenzy": 0,
+        "numRingStreak": 0,
+        "numTimeExtend": 0,
+        "numAnimalDoubler": 0,
+        "doubleRings": false,
+        "currentRoundId": 0,
+        "spinState": 0,
+        "lastFreeSpin": 0,
+        "pointsPending": 0,
+        "chaoStates": [],
+        "awardFlags": 1147105,
+        "energyCount": 5,
+        "energyRechargeTime": 0,
+        "lastRateVersion": 0,
+        "version": 9,
+        "ftueState": 5,
+        "miscData0": 2,
+        "miscData1": 1,
+        "numConsecutiveLogins": 0,
+        "lastLogin": 1795471718232
+      },
+      "friends": [
+        {
+          "playerId": 2,
+          "firstName": "Tails",
+          "facebookId": "100002",
+          "lastLogin": 1795380330968,
+          "score": 4200,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 3,
+          "firstName": "Knuckles",
+          "facebookId": "100003",
+          "lastLogin": 1795380330968,
+          "score": 3850,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 4,
+          "firstName": "Amy",
+          "facebookId": "100004",
+          "lastLogin": 1795380330968,
+          "score": 3120,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 5,
+          "firstName": "Shadow",
+          "facebookId": "100005",
+          "lastLogin": 1795380330968,
+          "score": 5400,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 8,
+          "firstName": "Friend 2180",
+          "facebookId": "2180",
+          "lastLogin": 1795471133635,
+          "score": 3993,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 9,
+          "firstName": "Friend 247",
+          "facebookId": "247",
+          "lastLogin": 1795471151336,
+          "score": 8105,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 10,
+          "firstName": "Friend 2187",
+          "facebookId": "2187",
+          "lastLogin": 1795471239300,
+          "score": 6111,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 11,
+          "firstName": "Friend 29",
+          "facebookId": "29",
+          "lastLogin": 1795471606675,
+          "score": 3150,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 12,
+          "firstName": "Friend 213",
+          "facebookId": "213",
+          "lastLogin": 1795471723635,
+          "score": 8409,
+          "nextGift": 0,
+          "nextEnergy": 0
+        },
+        {
+          "playerId": 13,
+          "firstName": "Friend 2109",
+          "facebookId": "2109",
+          "lastLogin": 1795472298287,
+          "score": 7797,
+          "nextGift": 0,
+          "nextEnergy": 0
+        }
+      ],
+      "messages": [
+        {
+          "messageId": 1,
+          "senderId": 2,
+          "messageType": 2,
+          "createdOn": 1795470434424
+        },
+        {
+          "messageId": 2,
+          "senderId": 3,
+          "messageType": 1,
+          "createdOn": 1795470464424
+        },
+        {
+          "messageId": 3,
+          "senderId": 7,
+          "messageType": 9,
+          "createdOn": 1795470494458
+        },
+        {
+          "messageId": 4,
+          "senderId": 8,
+          "messageType": 4,
+          "createdOn": 1795471133635
+        },
+        {
+          "messageId": 5,
+          "senderId": 9,
+          "messageType": 4,
+          "createdOn": 1795471151336
+        },
+        {
+          "messageId": 6,
+          "senderId": 10,
+          "messageType": 4,
+          "createdOn": 1795471239300
+        },
+        {
+          "messageId": 7,
+          "senderId": 11,
+          "messageType": 4,
+          "createdOn": 1795471606675
+        },
+        {
+          "messageId": 8,
+          "senderId": 12,
+          "messageType": 4,
+          "createdOn": 1795471723635
+        },
+        {
+          "messageId": 9,
+          "senderId": 13,
+          "messageType": 4,
+          "createdOn": 1795472298287
+        }
+      ],
+      "pendingReplies": [],
+      "nextMessageId": 10,
+      "lastMessageTime": 1795472298287,
+      "nextFriendPlayerId": 14,
+      "weekKey": 2968,
+      "weeklyResultKey": 2968,
+      "previousWeekScores": [
+        {
+          "playerId": 5,
+          "score": 5400,
+          "data": 0
+        },
+        {
+          "playerId": 2,
+          "score": 4200,
+          "data": 0
+        },
+        {
+          "playerId": 3,
+          "score": 3850,
+          "data": 0
+        },
+        {
+          "playerId": 4,
+          "score": 3120,
+          "data": 0
+        },
+        {
+          "playerId": 7,
+          "score": 0,
+          "data": 0
+        }
+      ]
+    }
+  ]
+}

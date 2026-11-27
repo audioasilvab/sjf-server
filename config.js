@@ -51,7 +51,54 @@ const INITIAL_VERSION = 9;
 
 var PLAYER;
 
-try {
+PLAYER = {
+		playerId: 1,
+	  accessToken: ACCESS_TOKEN,
+	  deviceId: '',
+	  uniqueId: 'local-01',
+	  cohortId: 0,
+	  facebook: {
+	  	firstName: 'Sonic Player',
+	  	facebookId: '100001',
+	  	facebookAccessToken: '',
+	  	scope: 'public_profile,user_friends'
+	  },
+	  state: {
+	  	lastUpdate: 0,
+		  numRings: 0,
+		  numRedRings: 0,
+		  score: 0,
+		  charTokenTime: 0,
+		  numCharTokens: 0,
+		  redRingTokenTime: 0,
+		  numRedRingTokens: 0,
+		  numChaoSearches: 0,
+		  sonic: 0, tails: 0, knuckles: 0, amy: 0, blaze: 0,
+		  vector: 0, shadow: 0, silver: 0, rouge: 0, cream: 0,
+		  numGoldTotem: 0, numHoopBoost: 0, numPowerDoubler: 0,
+		  numQuickFrenzy: 0, numRingStreak: 0, numTimeExtend: 0,
+		  numAnimalDoubler: 0,
+		  doubleRings: true,
+		  currentRoundId: 0,
+		  spinState: 0,
+		  lastFreeSpin: 0,
+		  pointsPending: 0,
+		  chaoStates: [],
+		  awardFlags: 0,
+		  energyCount: 0,
+		  energyRechargeTime: 0,
+		  lastRateVersion: 0,
+		  version: INITIAL_VERSION,
+		  ftueState: 7,
+		  miscData0: 0,
+		  miscData1: 0,
+		  numConsecutiveLogins: 0,
+		  lastLogin: Date.now()
+	  },
+	  crc: 0
+	}
+
+/*try {
   const saved = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/save.json'), 'utf8'));
 
   if (saved.state) {
@@ -114,7 +161,7 @@ try {
   } catch (e) {
     console.error(' Error al guardar:', e);
   }
-}
+}*/
 
 
 
