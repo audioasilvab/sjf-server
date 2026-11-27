@@ -1,9 +1,9 @@
 {
-  "roundId": 18213446,
-  "zone": "jungle_zone",
-  "nextRoundId": 18213447,
-  "nextZone": "mechanical_zone",
-  "previousRoundId": 18213445,
-  "previousZone": "green_hill_zone",
-  "startTime": 1795786282044
+  "roundId": 18213453,
+  "zone": "green_hill_zone",
+  "nextRoundId": 18213454,
+  "nextZone": "jungle_zone",
+  "previousRoundId": 18213452,
+  "previousZone": "blue_sky_zone",
+  "startTime": 1795816162044
 }

@@ -1,67 +1,27 @@
+const crypto = require('crypto');
 const express = require('express');
+
 const router = express.Router();
 
-const { BASE_PATH } = require('../config');
-
-
-// Clave de 32 bytes + NUL = 33 bytes (extraída del .so, ver PROTOCOLO.md §3)
+// ============================================================
+// CONSTANTES DEL PROTOCOLO (PROTOCOLO.md §3)
+// ============================================================
+// Clave de 32 bytes + NUL = 33 bytes (extraída del .so)
 const HMAC_KEY = Buffer.concat([
   Buffer.from('PvQmck9?y+ZBjgAfqCpa8W67UhTu_D!S', 'ascii'),
   Buffer.from([0x00])
 ]);
 
-// Constante del algoritmo (PROTOCOLO.md §3)
+// Constante del algoritmo
 const MULT = 0xBDC70E445308C215n;
 
 // ============================================================
-// PARSER FLEXIBLE + CAPTURA DE CID EXACTO
+// HELPERS
 // ============================================================
-router.use((req, res, next) => {
-  let raw = '';
-  req.on('data', (chunk) => { raw += chunk.toString('binary'); });
-  req.on('end', () => {
-    req.rawBody = raw;
-
-    // Extraer cid EXACTO como BigInt (para que no pierda precisión el JSON.parse)
-    const cidMatch = raw.match(/"cid"\s*:\s*(-?\d+)/);
-    req.cidExact = cidMatch ? BigInt(cidMatch[1]) : null;
-
-    // Extraer version también
-    const versionMatch = raw.match(/"version"\s*:\s*(\d+)/);
-    req.version = versionMatch ? parseInt(versionMatch[1], 10) : 0;
-
-    // Parsear el body normal (con BigInt para cid)
-    const trimmed = raw.trim();
-    if (trimmed.startsWith('{')) {
-      try {
-        req.body = JSON.parse(trimmed, (key, value) => {
-          if (key === 'cid' && typeof value === 'number' && !Number.isSafeInteger(value)) {
-            return String(value); // conservar como string si excede safe integer
-          }
-          return value;
-        });
-      } catch (e) {
-        req.body = {};
-      }
-    } else {
-      req.body = {};
-    }
-
-    next();
-  });
-});
-
-router.use((req, res, next) => {
-  const ts = new Date().toISOString();
-  console.log(`\n[${ts}] ${req.method} ${req.originalUrl} ← ${req.ip}`);
-  if (req.rawBody) console.log(`    Raw: ${req.rawBody}`);
-  next();
-});
-
 function u64le(value) {
   // Acepta BigInt o Number, devuelve Buffer de 8 bytes little-endian
   const buf = Buffer.alloc(8);
-  let v = BigInt(value) & 0xFFFFFFFFFFFFFFFFn; // forzar a 64 bits sin signo
+  let v = BigInt(value) & 0xFFFFFFFFFFFFFFFFn;
   for (let i = 0; i < 8; i++) {
     buf[i] = Number(v & 0xFFn);
     v >>= 8n;
@@ -71,10 +31,8 @@ function u64le(value) {
 
 function buildChallenge(cid) {
   // cid = BigInt con signo, tal como lo envió el cliente
-  // M = (R * MULT mod 2^64) XOR cid   (todo en 64 bits)
   const cidU64 = BigInt.asUintN(64, cid);
 
-  // Elegir R aleatorio de 64 bits
   const R = crypto.randomBytes(8).readBigUInt64LE(0);
 
   // M = (R * MULT mod 2^64) XOR cid
@@ -91,7 +49,7 @@ function buildChallenge(cid) {
   const challengeBuf = Buffer.concat([
     hmac,
     u64le(R),
-    Buffer.from([0x00, 0x00])  // relleno de 2 bytes para llegar a 42
+    Buffer.from([0x00, 0x00])
   ]);
 
   return {
@@ -101,7 +59,10 @@ function buildChallenge(cid) {
   };
 }
 
-router.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
+// ============================================================
+// RUTA
+// ============================================================
+router.post('/Handshake.json', (req, res) => {
   const cid = req.cidExact;
   if (cid === null) {
     console.log(' No se pudo extraer cid del body');
@@ -113,8 +74,7 @@ router.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
   const { challenge, challengeToken } = buildChallenge(cid);
 
   console.log(`   → challenge (${Buffer.from(challenge, 'base64').length} bytes): ${challenge.substring(0, 20)}...`);
-  res.status(200).json({status: 0, challengeToken, challenge});
+  res.status(200).json({ status: 0, challengeToken, challenge });
 });
-
 
 module.exports = router;

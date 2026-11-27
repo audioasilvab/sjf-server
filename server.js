@@ -1,5 +1,5 @@
 const express = require('express');
-const crypto = require('crypto');
+//const crypto = require('crypto');
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
@@ -8,46 +8,54 @@ const app = express();
 const { PORT, HOST, BASE_PATH, ACCESS_TOKEN, ZONE_STATE,
         PLAYER, SETTINGS_URI, ROUND_DURATION_MS } = require('./config');
 
-const CONNECT = require('./routes/connect');
-const HANDSHAKE = require('./routes/handshake');
-const SETTINGS = require('./routes/settings');
+app.use((req, res, next) => {
+  let raw = '';
+  req.on('data', (chunk) => { raw += chunk.toString('binary'); });
+  req.on('end', () => {
+    req.rawBody = raw;
 
-app.use(BASE_PATH, CONNECT);
-app.use(BASE_PATH, SETTINGS);
-app.use(BASE_PATH, HANDSHAKE);
+    const cidMatch = raw.match(/"cid"\s*:\s*(-?\d+)/);
+    req.cidExact = cidMatch ? BigInt(cidMatch[1]) : null;
 
-app.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
+    const versionMatch = raw.match(/"version"\s*:\s*(\d+)/);
+    req.version = versionMatch ? parseInt(versionMatch[1], 10) : 0;
 
-  const dir = path.join(__dirname, 'data');
-  const file = path.join(dir, 'savedata.json');
+    const trimmed = raw.trim();
+    if (trimmed.startsWith('{')) {
+      try {
+        req.body = JSON.parse(trimmed, (key, value) => {
+          if (key === 'cid' && typeof value === 'number' && !Number.isSafeInteger(value)) {
+            return String(value);
+          }
+          return value;
+        });
+      } catch (e) {
+        req.body = {};
+      }
+    } else {
+      req.body = {};
+    }
 
-  const profile = JSON.parse(fs.readFileSync(file, 'utf8'));
-
-  console.log(' Loaded successfully');
-
-  res.status(200).json({ status: 0, crc: profile.crc, accessToken: ACCESS_TOKEN, synchronizedPlayerState: profile.synchronizedPlayerState });
-});
-
-app.post(`${BASE_PATH}/PushProfile.json`, (req, res) => {
-
-  let recibido = req.body;
-
-
-  const dir = path.join(__dirname, 'data');
-  const file = path.join(dir, 'savedata.json');
-
-  fs.writeFileSync(file, JSON.stringify(recibido, null, 2), 'utf8');
-
-  console.log(' Saved successfully')
-
-  res.status(200).json({
-    status: 0, lastUpdate: Date.now(),
-    numRings: 0, numRedRings: 0,
-    score: 0, version: 9,
-    accessToken: ACCESS_TOKEN
+    next();
   });
 });
 
+app.use((req, res, next) => {
+  const ts = new Date().toISOString();
+  console.log(`\n[${ts}] ${req.method} ${req.originalUrl} ← ${req.ip}`);
+  if (req.rawBody) console.log(`    Raw: ${req.rawBody}`);
+  next();
+});
+
+const CONNECT   = require('./routes/connect');
+const SETTINGS  = require('./routes/settings');
+const PROFILE   = require('./routes/profile');
+const HANDSHAKE = require('./routes/handshake');   // ← nuevo
+
+app.use(BASE_PATH, HANDSHAKE);                     // ← nuevo
+app.use(BASE_PATH, CONNECT);
+app.use(BASE_PATH, SETTINGS);
+app.use(BASE_PATH, PROFILE);
 
 var FRIENDS = [
   {
@@ -115,8 +123,6 @@ var listaGuardada = [];
 // type = 0 → leaderboard actual/pendiente (en curso, se está llenando).
 // type = 1 → snapshot de resultados anteriores (la clasificación ya cerrada,
 // la de la semana/evento pasado).
-/*let score = (newScore > currentScore) ? newScore : currentScore;*/
-
 app.post(`${BASE_PATH}/GetScores.json`, (req, res) => {
   let type = req.body.type;
 
