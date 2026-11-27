@@ -1,89 +1,15 @@
 const express = require('express');
 const crypto = require('crypto');
+const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 const app = express();
 
-// ============================================================
-// CONFIGURACION (config.json)
-// ============================================================
-const CONFIG_PATH = path.join(__dirname, 'config.json');
+const { PORT, HOST, BASE_PATH, ACCESS_TOKEN, ZONE_STATE,
+        PLAYER, SETTINGS_URI, ROUND_DURATION_MS } = require('./config');
 
-let config = {};
-try {
-  config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-  console.log(` Configuración cargada desde ${CONFIG_PATH}`);
-} catch (err) {
-  console.warn(`⚠ No se pudo cargar config.json (${err.message}); usando valores por defecto.`);
-}
-
-const PORT = config.port ?? 8443;
-const HOST = config.host ?? '0.0.0.0';
-const BASE_PATH = config.apiBase ?? '/SJF23';
-const ACCESS_TOKEN = config.accessToken ?? 'devtoken';
-const SETTINGS_URI = config.settingsUri || `${BASE_PATH}/GetSettings.json`;
-
-// ============================================================
-// ESTADO GLOBAL DE LA RONDA (persistente en memoria)
-// ============================================================
-const ROUND_DURATION_MS = 10 * 60 * 1000; // 10 minutos por ronda
-
-// Estado de la ronda actual
-const zoneState = {
-  roundId: config.currentRoundId ?? 1,
-  zone: config.currentZone ?? 'mechanical_zone',
-  nextRoundId: config.nextRoundId ?? 2,
-  nextZone: config.nextZone ?? 'jungle_zone',
-  previousRoundId: config.previousRoundId ?? 0,
-  previousZone: config.previousZone ?? 'blue_sky_zone',
-  startTime: Date.now() // <-- se fija UNA sola vez
-};
-
-// Comprueba si la ronda ya expiró y, si es así, rota a la siguiente
-function tickRound() {
-  const now = Date.now();
-  if (now >= zoneState.startTime + ROUND_DURATION_MS) {
-    // Rotar
-    zoneState.previousRoundId = zoneState.roundId;
-    zoneState.previousZone = zoneState.zone;
-
-    zoneState.roundId = zoneState.nextRoundId;
-    zoneState.zone = zoneState.nextZone;
-
-    // Siguiente (puedes poner una lista/rotación real)
-    zoneState.nextRoundId = zoneState.roundId + 1;
-    zoneState.nextZone = pickNextZone(zoneState.zone);
-
-    // Avanzar startTime en múltiplos exactos para no acumular drift
-    while (now >= zoneState.startTime + ROUND_DURATION_MS) {
-      zoneState.startTime += ROUND_DURATION_MS;
-    }
-
-    console.log(` Ronda rotada → roundId=${zoneState.roundId}, zone=${zoneState.zone}`);
-  }
-}
-
-function pickNextZone(current) {
-  const zones = ['mechanical_zone', 'blue_sky_zone', 'green_hill_zone', 'jungle_zone'];
-  const idx = zones.indexOf(current);
-  return zones[(idx + 1) % zones.length];
-}
-
-// Helper para construir el objeto serverSettings siempre coherente
-function getServerSettings() {
-  tickRound();
-  const now = Math.floor(Date.now());
-  return {
-    serverTime: now,
-    currentRoundId: zoneState.roundId,
-    currentZone: zoneState.zone,
-    expiryTime: Math.floor((zoneState.startTime + ROUND_DURATION_MS)),
-    nextZone: zoneState.nextZone,
-    nextRoundId: zoneState.nextRoundId,
-    previousZone: zoneState.previousZone,
-    previousRoundId: zoneState.previousRoundId
-  };
-}
+const CONNECT = require('./routes/connect');
+const SETTINGS = require('./routes/settings');
 
 // Clave de 32 bytes + NUL = 33 bytes (extraída del .so, ver PROTOCOLO.md §3)
 const HMAC_KEY = Buffer.concat([
@@ -139,10 +65,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// ============================================================
-// UTILIDADES HMAC
-// ============================================================
-
 function u64le(value) {
   // Acepta BigInt o Number, devuelve Buffer de 8 bytes little-endian
   const buf = Buffer.alloc(8);
@@ -186,10 +108,6 @@ function buildChallenge(cid) {
   };
 }
 
-// ============================================================
-// ENDPOINTS
-// ============================================================
-
 app.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
   const cid = req.cidExact;
   if (cid === null) {
@@ -201,101 +119,339 @@ app.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
 
   const { challenge, challengeToken } = buildChallenge(cid);
 
-  const response = {
-    status: 0,
-    challengeToken,
-    challenge
-  };
-
   console.log(`   → challenge (${Buffer.from(challenge, 'base64').length} bytes): ${challenge.substring(0, 20)}...`);
-  res.status(200).json(response);
+  res.status(200).json({status: 0, challengeToken, challenge});
 });
 
-app.post(`${BASE_PATH}/Connect.json`, (req, res) => {
-  const now = Math.floor(Date.now());
-  console.log(' CONNECT recibido');
+app.use(BASE_PATH, CONNECT);
+app.use(BASE_PATH, SETTINGS);
 
-  const response = {
-    status: 0,
-    playerId: 1,
-    isNewAccount: false,
-    lastLogin: now,
-    accessToken: ACCESS_TOKEN,
-    uniqueId: "local-0001",
-    cohortId: 0,
-    settingsUri: SETTINGS_URI,
-    serverSettings: getServerSettings(),   // <-- coherente y persistente
-    lastUpdate: now,
-    numRings: 0,
-    numRedRings: 0,
-    score: 0,
-    version: req.body?.version || 0
-  };
 
-  res.status(200).json(response);
-});
 
-app.get(`${BASE_PATH}/GetSettings.json`, (req, res) => {
-  console.log(' GetSettings');
-  res.status(200).json({
-    status: 0,
-    serverSettings: getServerSettings()   // <-- mismo estado global
-  });
-});
 
 app.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
-  console.log(' GetProfile');
-  const now = Math.floor(Date.now() / 1000);
-  res.status(200).json({
-    status: 0,
-    crc: 0,
-    accessToken: ACCESS_TOKEN,
+  res.status(200).json({ status: 0, crc: 0, accessToken: ACCESS_TOKEN,
     synchronizedPlayerState: {
-      lastUpdate: now,
-      numRings: 0,
-      numRedRings: 0,
-      score: 0,
-      charTokenTime: now,
-      numCharTokens: 0,
-      redRingTokenTime: now,
-      numRedRingTokens: 0,
-      numChaoSearches: 0,
-      sonic: 0, tails: 0, knuckles: 0, amy: 0, blaze: 0,
-      vector: 0, shadow: 0, silver: 0, rouge: 0, cream: 0,
-      numGoldTotem: 0, numHoopBoost: 0, numPowerDoubler: 0,
-      numQuickFrenzy: 0, numRingStreak: 0, numTimeExtend: 0,
-      numAnimalDoubler: 0,
-      doubleRings: false,
-      currentRoundId: 1,
-      spinState: 0,
-      chaoStates: []                   // OBLIGATORIO, aunque vacío
+    rouge: 0,
+    miscData1: 1,
+    miscData0: 2,
+    awardFlags: 1153045,
+    tails: 1,
+    currentRoundId: 1449904,
+    numAnimalDoubler: 0,
+    numQuickFrenzy: 0,
+    energyCount: 1,
+    numCharTokens: 20,
+    spinState: 0,
+    redRingTokenTime: 1795476632000,
+    blaze: 1,
+    silver: 1,
+    lastRateVersion: 9,
+    numRingStreak: 0,
+    numPowerDoubler: 1,
+    lastFreeSpin: 0,
+    energyRechargeTime: 1795479015478,
+    cream: 0,
+    numHoopBoost: 0,
+    numRedRings: 28,
+    lastLogin: 1795478432007,
+    score: 2675061,
+    numTimeExtend: 0,
+    version: 9,
+    numChaoSearches: 0,
+    numRings: 11774,
+    vector: 1,
+    numConsecutiveLogins: 1,
+    numRedRingTokens: 0,
+    amy: 1,
+    chaoStates: [
+      { collectTime: 0, type: 11, state: 0 },
+      { collectTime: 0, type: 15, state: 0 },
+      { collectTime: 0, type: 1, state: 0 },
+      { collectTime: 0, type: 12, state: 0 },
+      { collectTime: 0, type: 16, state: 0 },
+      { collectTime: 0, type: 2, state: 0 },
+      { collectTime: 0, type: 13, state: 0 },
+      { collectTime: 0, type: 3, state: 0 },
+      { collectTime: 0, type: 23, state: 0 },
+      { collectTime: 0, type: 14, state: 0 },
+      { collectTime: 0, type: 4, state: 0 },
+      { collectTime: 0, type: 24, state: 0 },
+      { collectTime: 0, type: 6, state: 0 },
+      { collectTime: 0, type: 18, state: 0 },
+      { collectTime: 0, type: 26, state: 0 },
+      { collectTime: 1795476521887, type: 7, state: 2739207 },
+      { collectTime: 0, type: 19, state: 0 },
+      { collectTime: 0, type: 27, state: 0 },
+      { collectTime: 0, type: 5, state: 0 },
+      { collectTime: 0, type: 17, state: 0 },
+      { collectTime: 0, type: 25, state: 0 },
+      { collectTime: 0, type: 8, state: 0 },
+      { collectTime: 0, type: 20, state: 0 },
+      { collectTime: 0, type: 28, state: 0 },
+      { collectTime: 0, type: 9, state: 0 },
+      { collectTime: 0, type: 21, state: 0 },
+      { collectTime: 0, type: 29, state: 0 },
+      { collectTime: 0, type: 10, state: 0 },
+      { collectTime: 0, type: 22, state: 0 },
+      { collectTime: 0, type: 30, state: 0 }
+    ],
+    sonic: 1,
+    shadow: 1,
+    charTokenTime: 1795476632000,
+    pointsPending: 0,
+    doubleRings: true,
+    numGoldTotem: 4,
+    lastUpdate: 1795480232648,
+    knuckles: 1,
+    ftueState: 7
+  }});
+});
+
+app.post(`${BASE_PATH}/PushProfile.json`, (req, res) => {
+  res.status(200).json({
+    status: 0, lastUpdate: Date.now(),
+    numRings: 0, numRedRings: 0,
+    score: 0, version: 9,
+    accessToken: ACCESS_TOKEN
+  });
+});
+
+
+var FRIENDS = [
+  {
+    playerId: 2,
+    score: 0,
+    data: 0,
+    firstName: 'Juan Perea',
+    facebookId: '100002',
+    lastLogin: 1795221275330
+  },
+  {
+    playerId: 3,
+    score: 0,
+    data: 0,
+    firstName: 'Angel Ferrer',
+    facebookId: '100003',
+    lastLogin: 1795221275330
+  },
+  {
+    playerId: 4,
+    score: 0,
+    data: 0,
+    firstName: 'Jose Maestre',
+    facebookId: '100004',
+    lastLogin: 1795221275330
+  },
+  {
+    playerId: 5,
+    score: 0,
+    data: 0,
+    firstName: 'Edelyn Hernandez',
+    facebookId: '100005',
+    lastLogin: 1795221275330
+  },
+  {
+    playerId: 6,
+    score: 0,
+    data: 0,
+    firstName: 'Samuel Espinoza',
+    facebookId: '100006',
+    lastLogin: 1795221275330
+  },
+  {
+    playerId: 7,
+    score: 0,
+    data: 0,
+    firstName: 'Carla Villalobos',
+    facebookId: '100007',
+    lastLogin: 1795221275330
+  }
+];
+
+var finRonda = false;
+
+app.post(`${BASE_PATH}/GetFriends.json`, (req, res) => {
+  const list = FRIENDS;
+
+  console.log(` GetFriends: ${list.length} amigos`);
+  res.status(200).json({ status: 0, friends: list, accessToken: ACCESS_TOKEN });
+});
+
+var score = 0, data = 0;
+var listaGuardada = [];
+
+// type = 0 → leaderboard actual/pendiente (en curso, se está llenando).
+// type = 1 → snapshot de resultados anteriores (la clasificación ya cerrada,
+// la de la semana/evento pasado).
+/*let score = (newScore > currentScore) ? newScore : currentScore;*/
+
+app.post(`${BASE_PATH}/GetScores.json`, (req, res) => {
+  let type = req.body.type;
+
+  var nuevaLista = FRIENDS.map((friend) => {
+    let currentScore = friend.score;
+    let newScore = Math.floor((Math.random() * 350001) * 0.1);
+    return {
+      ...friend,
+      score: (newScore > currentScore) ? newScore : currentScore,
+      data: 0
     }
   });
+
+  var scores;
+
+  if (type === 1) {
+
+    scores = listaGuardada;
+    
+    res.status(200).json({ status: 0, scores, accessToken: ACCESS_TOKEN });
+    
+    let listaReiniciada = FRIENDS.map((friend) => {
+      return {
+        ...friend,
+        score: 0,
+        data: 0
+      }
+    })
+
+    scores = [
+      {
+        playerId: 1,
+        score: 0,
+        data: 0
+      },
+      ...listaReiniciada
+    ]
+
+    score = 0;
+    data = 0;
+
+    FRIENDS = listaReiniciada;
+  } else {
+
+    scores = [
+      {
+        playerId: 1,
+        score: score,
+        data: data
+      },
+      ...nuevaLista
+    ]
+
+    FRIENDS = nuevaLista;
+    listaGuardada = scores;
+    res.status(200).json({ status: 0, scores, accessToken: ACCESS_TOKEN });
+  }
 });
 
-// Placeholders para el resto
-[
-  'PushProfile.json', 'GetScores.json', 'PostScore.json',
-  'GetFriends.json', 'GetMessages.json', 'DeleteMessages.json',
-  'SendGift.json', 'RequestEnergy.json', 'AwardRequestItem.json',
-  'InviteFriend.json', 'LogIAP.json'
-].forEach(endpoint => {
-  app.post(`${BASE_PATH}/${endpoint}`, (req, res) => {
-    console.log(`⚠ ${endpoint}`);
-    res.status(200).json({ status: 0, accessToken: ACCESS_TOKEN });
+
+app.post(`${BASE_PATH}/PostScore.json`, (req, res) => {
+  const body = req.body || {};
+  score = body.score;
+  data = body.data;
+
+  res.status(200).json({ status: 0, isHighScore: true, accessToken: ACCESS_TOKEN });
+});
+
+
+
+app.post(`${BASE_PATH}/GetMessages.json`, (req, res) => {
+  let pending = []
+
+  res.status(200).json({ status: 0, messages: pending, accessToken: ACCESS_TOKEN });
+});
+
+app.post(`${BASE_PATH}/InviteFriend.json`, (req, res) => {
+  res.status(200).json({ status: 0, invited: [false, true], accessToken: ACCESS_TOKEN });
+})
+
+app.get(['/v2.7/dialog/oauth', '/v2.7/dialog/oauth/'], (req, res) => {
+  // 1. Normalizar query params (equivale a fbFirst)
+  const first = (v) => Array.isArray(v) ? v[0] : v;
+
+  const redirectUri = req.query.redirect_uri || 'fbconnect://success';
+  const scope       = req.query.scope;
+  const state       = req.query.state;
+  const userId      = '100001';
+
+  // 2. Construir signed_request falso (base64 de un JSON)
+  const payload = Buffer.from(JSON.stringify({
+    user_id: userId,
+    issued_at: Math.floor(Date.now() / 1000)
+  }), 'utf8').toString('base64');
+  const signedRequest = `x.${payload}`;
+
+  // 3. Montar el fragmento (#...) que el cliente espera tras el redirect
+  const params = new URLSearchParams();
+  params.set('access_token',  ACCESS_TOKEN);
+  params.set('expires_in',    '0');
+  params.set('signed_request', signedRequest);
+  params.set('granted_scopes', scope);
+  if (state) params.set('state', String(state));
+
+  const target = `${redirectUri}#${params.toString()}`;
+
+  // 4. HTML puente con escape seguro y auto-redirect
+  const href   = target
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  const script = JSON.stringify(target).replace(/</g, '\\u003c');
+
+  const html = `<!doctype html><html><head><meta charset="utf-8"><title>Facebook</title></head>` +
+    `<body><p>Redirigiendo...</p><p><a href="${href}">Continuar</a></p>` +
+    `<script>location.replace(${script});</script></body></html>`;
+
+  console.log(` FB OAuth emulado: state=${state ?? '-'}`);
+  res.type('html').send(html);
+});
+
+
+app.get(['/p/:id', '/p/:id/'], (req, res, next) => {
+  const id = String(req.params.id || '0');
+
+  console.log("=========== AVATARES =============");
+  console.log(id)
+
+  sharp(path.join(__dirname, `avatars/${id}.png`))
+    .resize(100, 80, { fit: 'cover' })
+    .removeAlpha()
+    .png({ compressionLevel: 9, palette: false })
+    .toBuffer()
+    .then((png) => {
+      res.type('png');
+      res.set('Cache-Control', 'public, max-age=0');    // 86400
+      res.status(200).send(png);
+    })
+    .catch(next);
+});
+
+app.get(['/v2.7/me', '/v2.7/me/'], (req, res) => {
+  //console.log(` FB /me emulado: fields=${fbFirst(req.query.fields) ?? '-'}`);
+
+  res.status(200).json({
+    id: '100001',                                     // Facebook ID
+    name: 'audioasilvab.06',                          // Facebook first name
+    link: `https://facebook.com/${'100001'}`,
+    numRings: 12345678
   });
 });
 
-app.use(BASE_PATH, (req, res) => {
-  console.log(`❌ 404: ${req.method} ${req.originalUrl}`);
-  res.status(404).json({ status: 1 });
+
+
+app.use('/v2.7', (req, res) => {
+  console.log(` FB Graph emulado: ${req.method} ${req.originalUrl}`);
+  res.status(200).json({ success: true });
 });
+
 
 app.listen(PORT, HOST, () => {
   console.log('============================================================');
-  console.log(' Servidor SJF23 (handshake HMAC) corriendo');
+  console.log('                     Servidor SJF23                         ');
   console.log('============================================================');
   console.log(`   http://${HOST}:${PORT}${BASE_PATH}`);
-  console.log(`   Zona actual: ${zoneState.zone} (roundId=${zoneState.roundId})`);
+  console.log(`   Zona actual: ${ZONE_STATE.zone} (roundId=${ZONE_STATE.roundId})`);
   console.log('============================================================');
 });
