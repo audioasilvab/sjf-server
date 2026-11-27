@@ -126,9 +126,6 @@ app.post(`${BASE_PATH}/Handshake.json`, (req, res) => {
 app.use(BASE_PATH, CONNECT);
 app.use(BASE_PATH, SETTINGS);
 
-
-
-
 app.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
   res.status(200).json({ status: 0, crc: 0, accessToken: ACCESS_TOKEN,
     synchronizedPlayerState: {
