@@ -5,7 +5,7 @@ const { PLAYER, ACCESS_TOKEN, SETTINGS_URI } = require('../config');
 
 const { getServerSettings } = require('../getServerSettings');
 
-router.post(`/Connect.json`, (req, res) => {
+router.post('/Connect.json', (req, res) => {
   const body = req.body || {};
 
   //PLAYER.deviceId = body.deviceId;

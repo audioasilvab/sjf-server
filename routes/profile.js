@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
 
-const { BASE_PATH, ACCESS_TOKEN } = require('../config');
+const { ACCESS_TOKEN } = require('../config');
 
-router.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
-  const dir = path.join(__dirname, 'data');
+router.post('/GetProfile.json', (req, res) => {
+  const dir = path.join(__dirname, '../data');
   const file = path.join(dir, 'savedata.json');
 
   const profile = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -14,11 +16,11 @@ router.post(`${BASE_PATH}/GetProfile.json`, (req, res) => {
   res.status(200).json({ status: 0, crc: profile.crc, accessToken: ACCESS_TOKEN, synchronizedPlayerState: profile.synchronizedPlayerState });
 });
 
-router.post(`${BASE_PATH}/PushProfile.json`, (req, res) => {
-  const dir = path.join(__dirname, 'data');
+router.post('/PushProfile.json', (req, res) => {
+  const dir = path.join(__dirname, '../data');
   const file = path.join(dir, 'savedata.json');
 
-  fs.writeFileSync(file, JSON.stringify(recibido, null, 2), 'utf8');
+  fs.writeFileSync(file, JSON.stringify(req.body, null, 2), 'utf8');
 
   console.log('-- Saved successfully')
 

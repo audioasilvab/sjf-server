@@ -46,15 +46,19 @@ app.use((req, res, next) => {
   next();
 });
 
+const HANDSHAKE = require('./routes/handshake');
 const CONNECT   = require('./routes/connect');
 const SETTINGS  = require('./routes/settings');
 const PROFILE   = require('./routes/profile');
-const HANDSHAKE = require('./routes/handshake');
+const MESSAGES = require('./routes/messages');
+const INVITE_FRIENDS = require('./routes/invitefriend');
 
 app.use(BASE_PATH, HANDSHAKE);
 app.use(BASE_PATH, CONNECT);
 app.use(BASE_PATH, SETTINGS);
 app.use(BASE_PATH, PROFILE);
+app.use(BASE_PATH, MESSAGES);
+app.use(BASE_PATH, INVITE_FRIENDS);
 
 var FRIENDS = [
   {
@@ -188,16 +192,6 @@ app.post(`${BASE_PATH}/PostScore.json`, (req, res) => {
 
   res.status(200).json({ status: 0, isHighScore: true, accessToken: ACCESS_TOKEN });
 });
-
-app.post(`${BASE_PATH}/GetMessages.json`, (req, res) => {
-  let pending = []
-
-  res.status(200).json({ status: 0, messages: pending, accessToken: ACCESS_TOKEN });
-});
-
-app.post(`${BASE_PATH}/InviteFriend.json`, (req, res) => {
-  res.status(200).json({ status: 0, invited: [false, true], accessToken: ACCESS_TOKEN });
-})
 
 app.get(['/v2.7/dialog/oauth', '/v2.7/dialog/oauth/'], (req, res) => {
   // 1. Normalizar query params (equivale a fbFirst)
